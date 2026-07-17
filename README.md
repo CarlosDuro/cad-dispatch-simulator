@@ -68,3 +68,18 @@ Esta versión usa una nueva clave de almacenamiento local para evitar que una ve
 ## Versión v5
 
 Los archivos JavaScript y CSS se renombraron a `app-v5.js` y `styles-v5.css` para evitar que GitHub Pages o el navegador reutilicen versiones anteriores almacenadas en caché. En la pantalla Personas debe aparecer la insignia “v5 · DNI ilustrado”.
+
+
+## Corrección v6
+Se corrigió un error de JavaScript que impedía navegar entre las secciones. La versión fue validada con `node --check`.
+
+
+## Versión v7 limpia
+
+El paquete contiene únicamente los archivos de la versión vigente:
+
+- `index.html`
+- `app-v7.js`
+- `styles-v7.css`
+
+`index.html` apunta expresamente a esos archivos. La sintaxis de `app-v7.js` fue validada con Node.js. La insignia visible en Personas debe indicar “v7 · navegación corregida”.

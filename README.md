@@ -108,3 +108,13 @@ La pantalla Dispatch ahora tiene un scroll general visible dentro del widget de 
 - Scroll horizontal cuando el contenedor es más angosto que las tres columnas.
 - Barra superior fija dentro de la aplicación.
 - Los paneles ya no recortan el contenido antes de que actúe el scroll.
+
+
+## Versión v10 — scroll general
+
+La aplicación ya no depende de un scroll interno en `#view-dispatch`. Ahora utiliza el scroll nativo del documento dentro del iframe de Omniview/SBO, que es más compatible:
+
+- Scroll vertical general del contenido.
+- Scroll horizontal cuando las tres columnas superan el ancho disponible.
+- Sidebar y barra superior permanecen visibles mediante `position: sticky`.
+- Se eliminaron los bloqueos efectivos producidos por `overflow: hidden` y alturas fijas.

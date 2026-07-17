@@ -1,0 +1,251 @@
+const STORAGE_KEY="n11-dispatch-v4-people";
+const baseLat=19.4326,baseLng=-99.1332;
+const seed={
+ incidents:[
+ {operationalStatus:"responding",id:"INC-2026-0005",caller:"Daniel Bello",document:"12345678901",type:"Extorsión telefónica",priority:"medium",status:"open",createdAt:"2026-01-26T15:02:40",address:"Av. Juárez 50, Centro",lat:19.4355,lng:-99.1412,description:"Se investiga posible extorsión telefónica; la persona reportante identificó al presunto responsable.",notes:"Solicitante permanece en línea.",assigned:["P-014"],timeline:[["Incidente creado","2026-01-26T15:02:40"],["Dirección geolocalizada","2026-01-26T15:03:00"],["Unidad P-014 despachada","2026-01-26T15:04:15"]]},
+ {operationalStatus:"validated",id:"INC-2026-0004",caller:"Diego Piero",document:"98765432100",type:"Abuso de confianza",priority:"medium",status:"open",createdAt:"2026-01-26T15:01:15",address:"C. Libertad 114",lat:19.428,lng:-99.121,description:"Posible abuso de confianza relacionado con faltante de mercancía en comercio.",notes:"",assigned:[],timeline:[["Incidente creado","2026-01-26T15:01:15"],["Solicitante validado","2026-01-26T15:02:10"]]},
+ {operationalStatus:"responding",id:"INC-2026-0003",caller:"Lorenzo Bustamante",document:"45678912300",type:"Ahogamiento",priority:"high",status:"open",createdAt:"2026-01-26T14:59:40",address:"Bosque de Chapultepec",lat:19.4204,lng:-99.1819,description:"Persona con dificultad respiratoria en cuerpo de agua. Atención médica inmediata.",notes:"Protocolo médico activado.",assigned:["AMB-07"],timeline:[["Incidente creado","2026-01-26T14:59:40"],["Prioridad alta validada","2026-01-26T15:00:01"],["AMB-07 despachada","2026-01-26T15:00:22"]]},
+ {operationalStatus:"responding",id:"INC-2026-0002",caller:"Lorena Palacios",document:"74185296300",type:"Asfixia",priority:"high",status:"open",createdAt:"2026-01-26T14:58:16",address:"Roma Norte",lat:19.4177,lng:-99.1622,description:"Paciente consciente con obstrucción parcial de vía aérea.",notes:"Se brindan instrucciones telefónicas.",assigned:["AMB-11"],timeline:[["Incidente creado","2026-01-26T14:58:16"],["Instrucciones de primeros auxilios","2026-01-26T14:58:50"],["AMB-11 despachada","2026-01-26T14:59:04"]]},
+ {operationalStatus:"resolved",id:"INC-2026-0001",caller:"Mario Leal",document:"36925814700",type:"Accidente ferroviario",priority:"high",status:"closed",createdAt:"2026-01-26T14:55:19",closedAt:"2026-01-26T16:20:00",address:"Buenavista",lat:19.446,lng:-99.1525,description:"Incidente en vía férrea con posible víctima.",notes:"Atención concluida.",assigned:["P-022","AMB-03"],timeline:[["Incidente creado","2026-01-26T14:55:19"],["Policía y ambulancia notificadas","2026-01-26T14:55:44"],["Incidente cerrado","2026-01-26T16:20:00"]]}
+ ],
+ units:[
+ {id:"P-014",name:"Patrulla P-014",type:"Policía",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.437,lng:-99.143},
+ {id:"P-022",name:"Patrulla P-022",type:"Policía",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.445,lng:-99.128},
+ {id:"P-031",name:"Patrulla P-031",type:"Policía",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.424,lng:-99.15},
+ {id:"AMB-03",name:"Ambulancia AMB-03",type:"Ambulancia",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.431,lng:-99.112},
+ {id:"AMB-07",name:"Ambulancia AMB-07",type:"Ambulancia",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.421,lng:-99.177},
+ {id:"AMB-11",name:"Ambulancia AMB-11",type:"Ambulancia",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.418,lng:-99.16},
+ {id:"BOM-02",name:"Bomberos BOM-02",type:"Bomberos",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.44,lng:-99.17}
+ ],
+ people:[{"document":"12345678901","name":"Daniel Lorenzo Ramírez","phone":"55 1234 5678","address":"Av. Universidad 945, CDMX","alerts":"Sin alertas","birthDate":"1988-04-18","nationality":"MEX","sex":"M","validUntil":"2031-04-18","incidents":["INC-2026-0005"]},{"document":"98765432100","name":"María Fernanda López","phone":"55 8765 4321","address":"Paseo de la Reforma 350, CDMX","alerts":"Persona adulta mayor","birthDate":"1962-09-03","nationality":"MEX","sex":"F","validUntil":"2029-09-03","incidents":["INC-2026-0003"]},{"document":"45678912300","name":"Carlos Alberto Mendoza","phone":"55 4567 8912","address":"Calz. de Tlalpan 1820, CDMX","alerts":"Antecedente médico reportado","birthDate":"1979-11-26","nationality":"MEX","sex":"M","validUntil":"2030-11-26","incidents":["INC-2026-0002"]},{"document":"10055178484","name":"Ana García Martínez","phone":"55 1111 1213","address":"Av. Universidad 945","alerts":"Persona adulta mayor","birthDate":"1964-04-04","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"10068973105","name":"Jorge Torres Mendoza","phone":"55 1148 1284","address":"Eje Central 650","alerts":"Idioma preferente: portugués","birthDate":"1967-05-05","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"10082767726","name":"Laura Vega Campos","phone":"55 1185 1355","address":"Av. Revolución 1180","alerts":"Requiere asistencia auditiva","birthDate":"1970-06-06","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"10096562347","name":"Miguel Rodríguez Sánchez","phone":"55 1222 1426","address":"Río Churubusco 422","alerts":"Sin alertas","birthDate":"1973-07-07","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"10110356968","name":"Fernanda Flores Castillo","phone":"55 1259 1497","address":"División del Norte 1550","alerts":"Contacto frecuente con emergencias","birthDate":"1976-08-08","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"10124151589","name":"Ricardo Castro Medina","phone":"55 1296 1568","address":"Av. Juárez 88","alerts":"Antecedente médico reportado","birthDate":"1979-09-09","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"10137946210","name":"Sofía Martínez Torres","phone":"55 1333 1639","address":"Viaducto Miguel Alemán 720","alerts":"Persona adulta mayor","birthDate":"1982-10-10","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]},{"document":"10151740831","name":"Alejandro Gómez Navarro","phone":"55 1370 1710","address":"Av. Insurgentes Sur 120","alerts":"Idioma preferente: portugués","birthDate":"1985-11-11","nationality":"MEX","sex":"M","validUntil":"2031-12-31","incidents":[]},{"document":"10165535452","name":"Valeria Rojas Aguilar","phone":"55 1407 1781","address":"Paseo de la Reforma 350","alerts":"Requiere asistencia auditiva","birthDate":"1988-12-12","nationality":"MEX","sex":"F","validUntil":"2032-12-31","incidents":[]},{"document":"10179330073","name":"Eduardo Hernández Ruiz","phone":"55 1444 1852","address":"Calz. de Tlalpan 1820","alerts":"Sin alertas","birthDate":"1991-01-13","nationality":"MEX","sex":"M","validUntil":"2033-12-31","incidents":[]},{"document":"10193124694","name":"Gabriela Díaz Vargas","phone":"55 1481 1923","address":"Av. Universidad 945","alerts":"Contacto frecuente con emergencias","birthDate":"1994-02-14","nationality":"MEX","sex":"F","validUntil":"2034-12-31","incidents":[]},{"document":"10206919315","name":"Roberto Mendoza Cabrera","phone":"55 1518 1994","address":"Eje Central 650","alerts":"Antecedente médico reportado","birthDate":"1997-03-15","nationality":"MEX","sex":"M","validUntil":"2028-12-31","incidents":[]},{"document":"10220713936","name":"Paola Pérez Gómez","phone":"55 1555 2065","address":"Av. Revolución 1180","alerts":"Persona adulta mayor","birthDate":"2000-04-16","nationality":"MEX","sex":"F","validUntil":"2029-12-31","incidents":[]},{"document":"10234508557","name":"Fernando Cruz Ortega","phone":"55 1592 2136","address":"Río Churubusco 422","alerts":"Idioma preferente: portugués","birthDate":"1955-05-17","nationality":"MEX","sex":"M","validUntil":"2030-12-31","incidents":[]},{"document":"10248303178","name":"Camila Reyes Fuentes","phone":"55 1629 2207","address":"División del Norte 1550","alerts":"Requiere asistencia auditiva","birthDate":"1958-06-18","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"10262097799","name":"Arturo Sánchez Romero","phone":"55 1666 2278","address":"Av. Juárez 88","alerts":"Sin alertas","birthDate":"1961-07-19","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"10275892420","name":"Natalia Morales Reyes","phone":"55 1703 2349","address":"Viaducto Miguel Alemán 720","alerts":"Contacto frecuente con emergencias","birthDate":"1964-08-20","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"10289687041","name":"Andrés López Hernández","phone":"55 1740 2420","address":"Av. Insurgentes Sur 120","alerts":"Antecedente médico reportado","birthDate":"1967-09-21","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"10303481662","name":"Mónica Ramírez Flores","phone":"55 1777 2491","address":"Paseo de la Reforma 350","alerts":"Persona adulta mayor","birthDate":"1970-10-22","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"10317276283","name":"Sergio Ortiz Silva","phone":"55 1814 2562","address":"Calz. de Tlalpan 1820","alerts":"Idioma preferente: portugués","birthDate":"1973-11-23","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"10331070904","name":"Patricia García Martínez","phone":"55 1851 2633","address":"Av. Universidad 945","alerts":"Requiere asistencia auditiva","birthDate":"1976-12-24","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]},{"document":"10344865525","name":"Diego Torres Mendoza","phone":"55 1888 2704","address":"Eje Central 650","alerts":"Sin alertas","birthDate":"1979-01-25","nationality":"MEX","sex":"M","validUntil":"2031-12-31","incidents":[]},{"document":"10358660146","name":"Lucía Vega Campos","phone":"55 1925 2775","address":"Av. Revolución 1180","alerts":"Contacto frecuente con emergencias","birthDate":"1982-02-26","nationality":"MEX","sex":"F","validUntil":"2032-12-31","incidents":[]},{"document":"10372454767","name":"Héctor Rodríguez Sánchez","phone":"55 1962 2846","address":"Río Churubusco 422","alerts":"Antecedente médico reportado","birthDate":"1985-03-27","nationality":"MEX","sex":"M","validUntil":"2033-12-31","incidents":[]},{"document":"10386249388","name":"Verónica Flores Castillo","phone":"55 1999 2917","address":"División del Norte 1550","alerts":"Persona adulta mayor","birthDate":"1988-04-01","nationality":"MEX","sex":"F","validUntil":"2034-12-31","incidents":[]},{"document":"10400044009","name":"Raúl Castro Medina","phone":"55 2036 2988","address":"Av. Juárez 88","alerts":"Idioma preferente: portugués","birthDate":"1991-05-02","nationality":"MEX","sex":"M","validUntil":"2028-12-31","incidents":[]},{"document":"10413838630","name":"Andrea Martínez Torres","phone":"55 2073 3059","address":"Viaducto Miguel Alemán 720","alerts":"Requiere asistencia auditiva","birthDate":"1994-06-03","nationality":"MEX","sex":"F","validUntil":"2029-12-31","incidents":[]},{"document":"10427633251","name":"Emilio Gómez Navarro","phone":"55 2110 3130","address":"Av. Insurgentes Sur 120","alerts":"Sin alertas","birthDate":"1997-07-04","nationality":"MEX","sex":"M","validUntil":"2030-12-31","incidents":[]},{"document":"10441427872","name":"Renata Rojas Aguilar","phone":"55 2147 3201","address":"Paseo de la Reforma 350","alerts":"Contacto frecuente con emergencias","birthDate":"2000-08-05","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"10455222493","name":"Óscar Hernández Ruiz","phone":"55 2184 3272","address":"Calz. de Tlalpan 1820","alerts":"Antecedente médico reportado","birthDate":"1955-09-06","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"10469017114","name":"Diana Díaz Vargas","phone":"55 2221 3343","address":"Av. Universidad 945","alerts":"Persona adulta mayor","birthDate":"1958-10-07","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"10482811735","name":"Iván Mendoza Cabrera","phone":"55 2258 3414","address":"Eje Central 650","alerts":"Idioma preferente: portugués","birthDate":"1961-11-08","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"10496606356","name":"Claudia Pérez Gómez","phone":"55 2295 3485","address":"Av. Revolución 1180","alerts":"Requiere asistencia auditiva","birthDate":"1964-12-09","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"10510400977","name":"Manuel Cruz Ortega","phone":"55 2332 3556","address":"Río Churubusco 422","alerts":"Sin alertas","birthDate":"1967-01-10","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"10524195598","name":"Elena Reyes Fuentes","phone":"55 2369 3627","address":"División del Norte 1550","alerts":"Contacto frecuente con emergencias","birthDate":"1970-02-11","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]},{"document":"10537990219","name":"Martín Sánchez Romero","phone":"55 2406 3698","address":"Av. Juárez 88","alerts":"Antecedente médico reportado","birthDate":"1973-03-12","nationality":"MEX","sex":"M","validUntil":"2031-12-31","incidents":[]},{"document":"10551784840","name":"Carolina Morales Reyes","phone":"55 2443 3769","address":"Viaducto Miguel Alemán 720","alerts":"Persona adulta mayor","birthDate":"1976-04-13","nationality":"MEX","sex":"F","validUntil":"2032-12-31","incidents":[]},{"document":"10565579461","name":"Daniel López Hernández","phone":"55 2480 3840","address":"Av. Insurgentes Sur 120","alerts":"Idioma preferente: portugués","birthDate":"1979-05-14","nationality":"MEX","sex":"M","validUntil":"2033-12-31","incidents":[]},{"document":"10579374082","name":"María Ramírez Flores","phone":"55 2517 3911","address":"Paseo de la Reforma 350","alerts":"Requiere asistencia auditiva","birthDate":"1982-06-15","nationality":"MEX","sex":"F","validUntil":"2034-12-31","incidents":[]},{"document":"10593168703","name":"Carlos Ortiz Silva","phone":"55 2554 3982","address":"Calz. de Tlalpan 1820","alerts":"Sin alertas","birthDate":"1985-07-16","nationality":"MEX","sex":"M","validUntil":"2028-12-31","incidents":[]},{"document":"10606963324","name":"Ana García Martínez","phone":"55 2591 4053","address":"Av. Universidad 945","alerts":"Contacto frecuente con emergencias","birthDate":"1988-08-17","nationality":"MEX","sex":"F","validUntil":"2029-12-31","incidents":[]},{"document":"10620757945","name":"Jorge Torres Mendoza","phone":"55 2628 4124","address":"Eje Central 650","alerts":"Antecedente médico reportado","birthDate":"1991-09-18","nationality":"MEX","sex":"M","validUntil":"2030-12-31","incidents":[]},{"document":"10634552566","name":"Laura Vega Campos","phone":"55 2665 4195","address":"Av. Revolución 1180","alerts":"Persona adulta mayor","birthDate":"1994-10-19","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"10648347187","name":"Miguel Rodríguez Sánchez","phone":"55 2702 4266","address":"Río Churubusco 422","alerts":"Idioma preferente: portugués","birthDate":"1997-11-20","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"10662141808","name":"Fernanda Flores Castillo","phone":"55 2739 4337","address":"División del Norte 1550","alerts":"Requiere asistencia auditiva","birthDate":"2000-12-21","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"10675936429","name":"Ricardo Castro Medina","phone":"55 2776 4408","address":"Av. Juárez 88","alerts":"Sin alertas","birthDate":"1955-01-22","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"10689731050","name":"Sofía Martínez Torres","phone":"55 2813 4479","address":"Viaducto Miguel Alemán 720","alerts":"Contacto frecuente con emergencias","birthDate":"1958-02-23","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"10703525671","name":"Alejandro Gómez Navarro","phone":"55 2850 4550","address":"Av. Insurgentes Sur 120","alerts":"Antecedente médico reportado","birthDate":"1961-03-24","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"10717320292","name":"Valeria Rojas Aguilar","phone":"55 2887 4621","address":"Paseo de la Reforma 350","alerts":"Persona adulta mayor","birthDate":"1964-04-25","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]},{"document":"10731114913","name":"Eduardo Hernández Ruiz","phone":"55 2924 4692","address":"Calz. de Tlalpan 1820","alerts":"Idioma preferente: portugués","birthDate":"1967-05-26","nationality":"MEX","sex":"M","validUntil":"2031-12-31","incidents":[]},{"document":"10744909534","name":"Gabriela Díaz Vargas","phone":"55 2961 4763","address":"Av. Universidad 945","alerts":"Requiere asistencia auditiva","birthDate":"1970-06-27","nationality":"MEX","sex":"F","validUntil":"2032-12-31","incidents":[]},{"document":"10758704155","name":"Roberto Mendoza Cabrera","phone":"55 2998 4834","address":"Eje Central 650","alerts":"Sin alertas","birthDate":"1973-07-01","nationality":"MEX","sex":"M","validUntil":"2033-12-31","incidents":[]},{"document":"10772498776","name":"Paola Pérez Gómez","phone":"55 3035 4905","address":"Av. Revolución 1180","alerts":"Contacto frecuente con emergencias","birthDate":"1976-08-02","nationality":"MEX","sex":"F","validUntil":"2034-12-31","incidents":[]},{"document":"10786293397","name":"Fernando Cruz Ortega","phone":"55 3072 4976","address":"Río Churubusco 422","alerts":"Antecedente médico reportado","birthDate":"1979-09-03","nationality":"MEX","sex":"M","validUntil":"2028-12-31","incidents":[]},{"document":"10800088018","name":"Camila Reyes Fuentes","phone":"55 3109 5047","address":"División del Norte 1550","alerts":"Persona adulta mayor","birthDate":"1982-10-04","nationality":"MEX","sex":"F","validUntil":"2029-12-31","incidents":[]},{"document":"10813882639","name":"Arturo Sánchez Romero","phone":"55 3146 5118","address":"Av. Juárez 88","alerts":"Idioma preferente: portugués","birthDate":"1985-11-05","nationality":"MEX","sex":"M","validUntil":"2030-12-31","incidents":[]},{"document":"10827677260","name":"Natalia Morales Reyes","phone":"55 3183 5189","address":"Viaducto Miguel Alemán 720","alerts":"Requiere asistencia auditiva","birthDate":"1988-12-06","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"10841471881","name":"Andrés López Hernández","phone":"55 3220 5260","address":"Av. Insurgentes Sur 120","alerts":"Sin alertas","birthDate":"1991-01-07","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"10855266502","name":"Mónica Ramírez Flores","phone":"55 3257 5331","address":"Paseo de la Reforma 350","alerts":"Contacto frecuente con emergencias","birthDate":"1994-02-08","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"10869061123","name":"Sergio Ortiz Silva","phone":"55 3294 5402","address":"Calz. de Tlalpan 1820","alerts":"Antecedente médico reportado","birthDate":"1997-03-09","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"10882855744","name":"Patricia García Martínez","phone":"55 3331 5473","address":"Av. Universidad 945","alerts":"Persona adulta mayor","birthDate":"2000-04-10","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"10896650365","name":"Diego Torres Mendoza","phone":"55 3368 5544","address":"Eje Central 650","alerts":"Idioma preferente: portugués","birthDate":"1955-05-11","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"10910444986","name":"Lucía Vega Campos","phone":"55 3405 5615","address":"Av. Revolución 1180","alerts":"Requiere asistencia auditiva","birthDate":"1958-06-12","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]},{"document":"10924239607","name":"Héctor Rodríguez Sánchez","phone":"55 3442 5686","address":"Río Churubusco 422","alerts":"Sin alertas","birthDate":"1961-07-13","nationality":"MEX","sex":"M","validUntil":"2031-12-31","incidents":[]},{"document":"10938034228","name":"Verónica Flores Castillo","phone":"55 3479 5757","address":"División del Norte 1550","alerts":"Contacto frecuente con emergencias","birthDate":"1964-08-14","nationality":"MEX","sex":"F","validUntil":"2032-12-31","incidents":[]},{"document":"10951828849","name":"Raúl Castro Medina","phone":"55 3516 5828","address":"Av. Juárez 88","alerts":"Antecedente médico reportado","birthDate":"1967-09-15","nationality":"MEX","sex":"M","validUntil":"2033-12-31","incidents":[]},{"document":"10965623470","name":"Andrea Martínez Torres","phone":"55 3553 5899","address":"Viaducto Miguel Alemán 720","alerts":"Persona adulta mayor","birthDate":"1970-10-16","nationality":"MEX","sex":"F","validUntil":"2034-12-31","incidents":[]},{"document":"10979418091","name":"Emilio Gómez Navarro","phone":"55 3590 5970","address":"Av. Insurgentes Sur 120","alerts":"Idioma preferente: portugués","birthDate":"1973-11-17","nationality":"MEX","sex":"M","validUntil":"2028-12-31","incidents":[]},{"document":"10993212712","name":"Renata Rojas Aguilar","phone":"55 3627 6041","address":"Paseo de la Reforma 350","alerts":"Requiere asistencia auditiva","birthDate":"1976-12-18","nationality":"MEX","sex":"F","validUntil":"2029-12-31","incidents":[]},{"document":"11007007333","name":"Óscar Hernández Ruiz","phone":"55 3664 6112","address":"Calz. de Tlalpan 1820","alerts":"Sin alertas","birthDate":"1979-01-19","nationality":"MEX","sex":"M","validUntil":"2030-12-31","incidents":[]},{"document":"11020801954","name":"Diana Díaz Vargas","phone":"55 3701 6183","address":"Av. Universidad 945","alerts":"Contacto frecuente con emergencias","birthDate":"1982-02-20","nationality":"MEX","sex":"F","validUntil":"2031-12-31","incidents":[]},{"document":"11034596575","name":"Iván Mendoza Cabrera","phone":"55 3738 6254","address":"Eje Central 650","alerts":"Antecedente médico reportado","birthDate":"1985-03-21","nationality":"MEX","sex":"M","validUntil":"2032-12-31","incidents":[]},{"document":"11048391196","name":"Claudia Pérez Gómez","phone":"55 3775 6325","address":"Av. Revolución 1180","alerts":"Persona adulta mayor","birthDate":"1988-04-22","nationality":"MEX","sex":"F","validUntil":"2033-12-31","incidents":[]},{"document":"11062185817","name":"Manuel Cruz Ortega","phone":"55 3812 6396","address":"Río Churubusco 422","alerts":"Idioma preferente: portugués","birthDate":"1991-05-23","nationality":"MEX","sex":"M","validUntil":"2034-12-31","incidents":[]},{"document":"11075980438","name":"Elena Reyes Fuentes","phone":"55 3849 6467","address":"División del Norte 1550","alerts":"Requiere asistencia auditiva","birthDate":"1994-06-24","nationality":"MEX","sex":"F","validUntil":"2028-12-31","incidents":[]},{"document":"11089775059","name":"Martín Sánchez Romero","phone":"55 3886 6538","address":"Av. Juárez 88","alerts":"Sin alertas","birthDate":"1997-07-25","nationality":"MEX","sex":"M","validUntil":"2029-12-31","incidents":[]},{"document":"11103569680","name":"Carolina Morales Reyes","phone":"55 3923 6609","address":"Viaducto Miguel Alemán 720","alerts":"Contacto frecuente con emergencias","birthDate":"2000-08-26","nationality":"MEX","sex":"F","validUntil":"2030-12-31","incidents":[]}],pois:[
+ {name:"Hospital General de México",category:"Hospital",lat:19.4131,lng:-99.1523,address:"Dr. Balmis 148"},
+ {name:"Estadio Ciudad de los Deportes",category:"Estadio",lat:19.3833,lng:-99.1784,address:"Nochebuena"},
+ {name:"Escuela Nacional Preparatoria 5",category:"Escuela",lat:19.282,lng:-99.138,address:"Coapa"},
+ {name:"Monumento a la Revolución",category:"Monumento",lat:19.4362,lng:-99.1547,address:"Plaza de la República"}
+ ]
+};
+let data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")||structuredClone(seed);
+let selectedId=data.incidents.find(x=>x.status==="open")?.id||data.incidents[0].id;
+let statusFilter="open",dispatchMap,fullMap,dispatchLayers=[],fullLayers=[];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+function selected(){return data.incidents.find(i=>i.id===selectedId)||data.incidents[0]}
+function fmt(d){return new Date(d).toLocaleString("es-MX")}
+function km(a,b,c,d){const R=6371,p=Math.PI/180,x=(c-a)*p,y=(d-b)*p;const q=Math.sin(x/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin(y/2)**2;return 2*R*Math.asin(Math.sqrt(q))}
+function priorityLabel(p){return {high:"PRIORIDAD ALTA",medium:"PRIORIDAD MEDIA",low:"PRIORIDAD BAJA"}[p]}
+function incidentStatusLabel(s){return {received:"Recibido",validated:"Validado",dispatching:"En despacho",responding:"En atención",resolved:"Resuelto"}[s]||"Recibido"}
+function unitStateLabel(s){return {disponible:"Disponible",despachada:"Despachada",en_ruta:"En ruta",en_escena:"En escena",fuera_servicio:"Fuera de servicio"}[s]||s}
+function ensureSchema(){
+ data.incidents.forEach(i=>{if(!i.operationalStatus)i.operationalStatus=i.status==="closed"?"resolved":"received"});
+ data.units.forEach(u=>{if(!u.operationalState)u.operationalState=u.status==="available"?"disponible":"despachada";if(u.heading==null)u.heading=0;if(u.speed==null)u.speed=0});
+}
+function addTimeline(i,text){i.timeline.push([text,new Date().toISOString()])}
+function initMaps(){
+ dispatchMap=L.map("dispatchMap").setView([baseLat,baseLng],13);
+ fullMap=L.map("fullMap").setView([baseLat,baseLng],12);
+ [dispatchMap,fullMap].forEach(m=>L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(m));
+ dispatchMap.on("click",e=>{const i=selected();i.lat=e.latlng.lat;i.lng=e.latlng.lng;i.address=`Ubicación seleccionada: ${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)}`;addTimeline(i,"Ubicación fijada directamente en el mapa");save();renderAll();toast("Ubicación del incidente actualizada")});
+ renderMaps()
+}
+function clearLayers(map,layers){layers.forEach(x=>map.removeLayer(x));layers.length=0}
+function markerIcon(color,txt){return L.divIcon({className:"",html:`<div style="width:30px;height:30px;border-radius:50%;background:${color};color:#fff;display:grid;place-items:center;border:2px solid white;box-shadow:0 3px 8px #0006;font-size:12px">${txt}</div>`,iconSize:[30,30]})}
+function renderMaps(){
+ if(!dispatchMap)return;
+ clearLayers(dispatchMap,dispatchLayers);clearLayers(fullMap,fullLayers);
+ const i=selected();
+ const im=L.marker([i.lat,i.lng],{icon:markerIcon("#ff5e50","!")}).addTo(dispatchMap).bindPopup(`<b>${i.id}</b><br>${i.type}<br>${i.address}`);dispatchLayers.push(im);dispatchMap.setView([i.lat,i.lng],13);
+ data.units.forEach(u=>{const m=L.marker([u.lat,u.lng],{icon:markerIcon(u.status==="available"?"#2fc98b":"#138df4","🚓")}).addTo(dispatchMap).bindPopup(`<b>${u.name}</b><br>${u.status==="available"?"Disponible":"Ocupada"}`);dispatchLayers.push(m)});
+ if($("#showIncidents")?.checked!==false)data.incidents.filter(x=>x.status==="open").forEach(x=>{const m=L.marker([x.lat,x.lng],{icon:markerIcon("#ff5e50","!")}).addTo(fullMap).bindPopup(`<b>${x.id}</b><br>${x.type}`);fullLayers.push(m)});
+ if($("#showUnits")?.checked!==false)data.units.forEach(u=>{const m=L.marker([u.lat,u.lng],{icon:markerIcon(u.status==="available"?"#2fc98b":"#138df4","🚓")}).addTo(fullMap).bindPopup(`<b>${u.name}</b><br>${u.status}`);fullLayers.push(m)})
+}
+function renderIncidents(){
+ const q=$("#incidentSearch").value.toLowerCase(),p=$("#priorityFilter").value;
+ const arr=data.incidents.filter(i=>i.status===statusFilter&&(!p||i.priority===p)&&(!q||`${i.id} ${i.type} ${i.caller}`.toLowerCase().includes(q)));
+ $("#incidentCount").textContent=`Total ${arr.length}`;
+ $("#incidentList").innerHTML=arr.map(i=>`<article class="incident-card ${i.id===selectedId?"selected":""}" data-id="${i.id}">
+ <div class="incident-top"><div><div class="incident-name">${i.caller}</div><div class="incident-type">${i.type}</div></div><span class="priority ${i.priority}">${priorityLabel(i.priority)}</span></div>
+ <div class="incident-code">${i.id} · ${fmt(i.createdAt)}</div><div class="incident-summary">${i.description}</div></article>`).join("")||`<div class="hint" style="padding:20px">No hay incidentes para mostrar.</div>`;
+ $$(".incident-card").forEach(c=>c.onclick=()=>{selectedId=c.dataset.id;renderAll()})
+}
+function renderDetails(){
+ const i=selected();$("#detailCode").textContent=i.id;$("#detailDescription").value=i.description;$("#detailNotes").value=i.notes||"";
+ const fields=[["Estado general",i.status==="open"?"En curso":"Completado"],["Estado operativo",incidentStatusLabel(i.operationalStatus)],["Tipo",i.type],["Prioridad",priorityLabel(i.priority)],["Solicitante",i.caller],["DNI / CPF",i.document],["Fecha y hora",fmt(i.createdAt)],["Ubicación",i.address],["Unidades",i.assigned.join(", ")||"Sin asignar"]];
+ $("#detailInfo").innerHTML=fields.map(([a,b])=>`<div class="info-item"><small>${a}</small><strong>${b}</strong></div>`).join("");
+ $("#timeline").innerHTML=i.timeline.slice().reverse().map(([a,b])=>`<div class="timeline-item"><span class="timeline-dot"></span><div><strong>${a}</strong><small>${fmt(b)}</small></div></div>`).join("")
+}
+function renderResources(){
+ const i=selected();
+ const available=data.units.filter(u=>u.operationalState==="disponible");
+ $("#unitSelect").innerHTML=`<option value="">Seleccione una unidad disponible</option>`+available.map(u=>`<option value="${u.id}">${u.name} · ${u.type}</option>`).join("");
+ const assigned=data.units.filter(u=>i.assigned.includes(u.id));
+ $("#assignedUnitSelect").innerHTML=`<option value="">Seleccione una unidad asignada</option>`+assigned.map(u=>`<option value="${u.id}">${u.name} · ${unitStateLabel(u.operationalState)}</option>`).join("");
+ $("#unitList").innerHTML=data.units.map(u=>`<div class="unit-card"><div><span class="status-dot ${u.status}"></span><b>${u.name}</b><br><small>${u.type} · ${km(i.lat,i.lng,u.lat,u.lng).toFixed(2)} km · ${unitStateLabel(u.operationalState)}</small></div><small>GPS ${u.lat.toFixed(4)}, ${u.lng.toFixed(4)}<br>${u.speed||0} km/h · rumbo ${Math.round(u.heading||0)}°</small></div>`).join("");
+ const rec=available.map(u=>({...u,d:km(i.lat,i.lng,u.lat,u.lng)})).sort((a,b)=>a.d-b.d);
+ $("#recommendList").innerHTML=rec.map((u,n)=>`<div class="recommend-card"><div><b>#${n+1} ${u.name}</b><br><small>${u.type} · ${u.d.toFixed(2)} km en línea recta</small><div class="route-meta" id="route-${u.id}">Calculando ruta y ETA...</div></div><button class="primary quick-dispatch" data-unit="${u.id}">Despachar</button></div>`).join("")||`<p class="hint">No hay unidades disponibles.</p>`;
+ $$(".quick-dispatch").forEach(b=>b.onclick=()=>dispatch(b.dataset.unit));
+ rec.slice(0,5).forEach(u=>calculateRoute(u,i));
+}
+async function calculateRoute(u,i){
+ const el=document.getElementById(`route-${u.id}`);if(!el)return;
+ try{
+  const url=`https://router.project-osrm.org/route/v1/driving/${u.lng},${u.lat};${i.lng},${i.lat}?overview=false`;
+  const r=await fetch(url);const j=await r.json();
+  if(j.routes&&j.routes[0]){
+   const route=j.routes[0],mins=Math.max(1,Math.round(route.duration/60));
+   el.textContent=`Ruta vial: ${(route.distance/1000).toFixed(2)} km · ETA ${mins} min`;
+  }else throw new Error("sin ruta");
+ }catch(e){
+  const d=km(i.lat,i.lng,u.lat,u.lng);el.textContent=`Estimación directa: ${d.toFixed(2)} km · ETA ${Math.max(1,Math.round(d/35*60))} min`;
+ }
+}
+function dispatch(id){
+ const i=selected(),u=data.units.find(x=>x.id===id);
+ if(!u)return toast("Seleccione una unidad");
+ if(u.operationalState!=="disponible"&&!i.assigned.includes(id))return toast("La unidad no está disponible");
+ if(i.assigned.includes(id))return toast("La unidad ya está asignada");
+ u.status="busy";u.operationalState="despachada";u.speed=0;i.operationalStatus="dispatching";i.assigned.push(id);
+ addTimeline(i,`Unidad ${id} despachada al incidente`);save();renderAll();toast(`${id} despachada`);
+}
+function renderDashboard(){
+ const open=data.incidents.filter(i=>i.status==="open").length,closed=data.incidents.length-open,available=data.units.filter(u=>u.status==="available").length;
+ $("#kpis").innerHTML=[["Incidentes activos",open],["Incidentes completados",closed],["Unidades disponibles",available],["Unidades ocupadas",data.units.length-available]].map(x=>`<div class="panel kpi"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+ const status=[["En curso",open],["Completados",closed]],prio=["high","medium","low"].map(p=>[priorityLabel(p),data.incidents.filter(i=>i.priority===p).length]);
+ bars("#statusBars",status);bars("#priorityBars",prio);
+ $("#recentTable").innerHTML=table(["Código","Tipo","Estado"],data.incidents.slice().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5).map(i=>[i.id,i.type,i.status==="open"?"En curso":"Completado"]));
+ $("#availabilityTable").innerHTML=table(["Unidad","Tipo","Estado"],data.units.map(u=>[u.id,u.type,u.status==="available"?"Disponible":"Ocupada"]))
+}
+function bars(sel,rows){const max=Math.max(...rows.map(r=>r[1]),1);$(sel).innerHTML=rows.map(r=>`<div class="bar-row"><span>${r[0]}</span><div class="bar-track"><div class="bar-fill" style="width:${r[1]/max*100}%"></div></div><b>${r[1]}</b></div>`).join("")}
+function table(h,rows){return `<table><thead><tr>${h.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table>`}
+function renderCoverage(){
+ const reqs=[
+ ["17","Interfaz web de servicio y despacho"],["18","Dashboard de incidentes en curso y completados"],["19","Descarga de informes en PDF y XLSX"],["20","Mapa con iconos y datos cartográficos"],["21","Formulario y panel de ocurrencias"],["22","Geolocalización desde registro"],["23","Búsqueda parcial de puntos de interés"],["24","Búsqueda de persona por DNI/CPF"],["25","Ubicación directa mediante clic en mapa"],["26","Detalle integral del incidente"],["27","Despacho de agentes al lugar"],["28","Agentes georreferenciados y lista de disponibles"],["29","Recomendación de agentes más cercanos"],["30","Cronología completa de hechos"]];
+ $("#coverageGrid").className="coverage-grid";$("#coverageGrid").innerHTML=reqs.map(r=>`<div class="coverage-item"><b>✓ ${r[0]}</b> ${r[1]}</div>`).join("")
+}
+function renderAll(){renderIncidents();renderDetails();renderResources();renderDashboard();renderCoverage();renderMaps()}
+function exportPdf(all=false){
+ if(!all&&selected().status!=="closed")return toast("Finalice el incidente antes de descargar su informe");
+ const arr=all?data.incidents:[selected()];const {jsPDF}=window.jspdf;const doc=new jsPDF();let y=15;
+ doc.setFontSize(16);doc.text(all?"Historial de incidentes":"Informe de incidente",14,y);y+=10;
+ arr.forEach((i,idx)=>{if(y>260){doc.addPage();y=15}doc.setFontSize(11);doc.text(`${i.id} - ${i.type}`,14,y);y+=6;doc.setFontSize(9);
+ const lines=[`Estado: ${i.status}`,`Prioridad: ${priorityLabel(i.priority)}`,`Solicitante: ${i.caller} (${i.document})`,`Fecha: ${fmt(i.createdAt)}`,`Ubicación: ${i.address}`,`Unidades: ${i.assigned.join(", ")||"Sin asignar"}`,`Descripción: ${i.description}`];
+ lines.forEach(t=>{const s=doc.splitTextToSize(t,180);doc.text(s,14,y);y+=s.length*5});y+=5;if(!all){doc.text("Cronología:",14,y);y+=5;i.timeline.forEach(t=>{doc.text(`- ${fmt(t[1])}: ${t[0]}`,16,y);y+=5})}y+=6});
+ doc.save(all?"historial-incidentes.pdf":`${selected().id}.pdf`)
+}
+function exportXlsx(all=false){
+ if(!all&&selected().status!=="closed")return toast("Finalice el incidente antes de descargar su informe");
+ const arr=all?data.incidents:[selected()];const rows=arr.map(i=>({Codigo:i.id,Estado:i.status,Tipo:i.type,Prioridad:priorityLabel(i.priority),Solicitante:i.caller,Documento:i.document,Fecha:fmt(i.createdAt),Ubicacion:i.address,Latitud:i.lat,Longitud:i.lng,Unidades:i.assigned.join(", "),Descripcion:i.description,Notas:i.notes,Cronologia:i.timeline.map(t=>`${fmt(t[1])}: ${t[0]}`).join(" | ")}));
+ const ws=XLSX.utils.json_to_sheet(rows),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Incidentes");XLSX.writeFile(wb,all?"historial-incidentes.xlsx":`${selected().id}.xlsx`)
+}
+async function geocode(text){
+ const local=data.pois.find(p=>`${p.name} ${p.category} ${p.address}`.toLowerCase().includes(text.toLowerCase()));if(local)return local;
+ try{const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(text+", México")}`,{headers:{"Accept-Language":"es"}});const j=await r.json();if(j[0])return{name:j[0].display_name,lat:+j[0].lat,lng:+j[0].lon,address:j[0].display_name}}catch(e){}
+ return null
+}
+function switchView(v){
+ $$(".nav").forEach(n=>n.classList.toggle("active",n.dataset.view===v));$$(".view").forEach(x=>x.classList.remove("active"));$(`#view-${v}`).classList.add("active");$("#currentTitle").textContent={dispatch:"Dispatch",dashboard:"Dashboard",map:"Mapa",people:"Personas",reports:"Reportes"}[v];setTimeout(()=>{dispatchMap?.invalidateSize();fullMap?.invalidateSize();renderMaps()},80)
+}
+$$(".nav[data-view]").forEach(n=>n.onclick=()=>switchView(n.dataset.view));
+$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");statusFilter=b.dataset.status;const first=data.incidents.find(i=>i.status===statusFilter);if(first)selectedId=first.id;renderAll()});
+$("#incidentSearch").oninput=renderIncidents;$("#priorityFilter").onchange=renderIncidents;
+$$(".section-tabs button").forEach(b=>b.onclick=()=>{$$(".section-tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$$(".detail-page").forEach(x=>x.classList.remove("active"));$(`#detail-${b.dataset.detail}`).classList.add("active")});
+$$(".resource-tabs button").forEach(b=>b.onclick=()=>{$$(".resource-tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$$(".resource-page").forEach(x=>x.classList.remove("active"));$(`#resource-${b.dataset.resource}`).classList.add("active")});
+$("#dispatchUnit").onclick=()=>dispatch($("#unitSelect").value);
+$("#locateUnit").onclick=()=>{const u=data.units.find(x=>x.id===$("#unitSelect").value);if(!u)return toast("Seleccione una unidad");dispatchMap.setView([u.lat,u.lng],16);toast(`${u.name} localizada`)};
+$("#addNote").onclick=()=>{const v=$("#newNote").value.trim();if(!v)return;const i=selected();i.notes+=(i.notes?"\n":"")+v;addTimeline(i,`Nota: ${v}`);$("#newNote").value="";save();renderAll()};
+$("#detailDescription").onchange=e=>{selected().description=e.target.value;save();renderIncidents()};
+$("#detailNotes").onchange=e=>{selected().notes=e.target.value;save()};
+$("#closeIncident").onclick=()=>{const i=selected();if(i.status==="closed")return toast("El incidente ya está cerrado");i.status="closed";i.operationalStatus="resolved";i.closedAt=new Date().toISOString();addTimeline(i,"Incidente cerrado");i.assigned.forEach(id=>{const u=data.units.find(x=>x.id===id);if(u){u.status="available";u.operationalState="disponible";u.speed=18}});save();statusFilter="open";selectedId=data.incidents.find(x=>x.status==="open")?.id||i.id;renderAll();toast("Incidente completado")};
+$("#advanceUnitState").onclick=()=>{
+ const id=$("#assignedUnitSelect").value,u=data.units.find(x=>x.id===id),i=selected();
+ if(!u)return toast("Seleccione una unidad asignada");
+ const next={despachada:"en_ruta",en_ruta:"en_escena",en_escena:"en_escena"}[u.operationalState]||"en_ruta";
+ if(next===u.operationalState)return toast("La unidad ya se encuentra en escena");
+ u.operationalState=next;u.speed=next==="en_ruta"?35:0;
+ if(next==="en_ruta")i.operationalStatus="responding";
+ addTimeline(i,`Unidad ${u.id}: ${unitStateLabel(next)}`);save();renderAll();toast(`${u.id}: ${unitStateLabel(next)}`);
+};
+$("#releaseUnit").onclick=()=>{
+ const id=$("#assignedUnitSelect").value,u=data.units.find(x=>x.id===id),i=selected();
+ if(!u)return toast("Seleccione una unidad asignada");
+ u.status="available";u.operationalState="disponible";u.speed=20;
+ i.assigned=i.assigned.filter(x=>x!==id);addTimeline(i,`Unidad ${id} liberada y disponible`);save();renderAll();toast(`${id} liberada`);
+};
+$("#changeStatus").onclick=()=>{const i=selected();$("#incidentStatusSelect").value=i.operationalStatus||"received";$("#statusDialog").showModal()};
+$("#closeStatusDialog").onclick=$("#cancelStatusDialog").onclick=()=>$("#statusDialog").close();
+$("#statusForm").onsubmit=e=>{e.preventDefault();const i=selected(),v=$("#incidentStatusSelect").value;i.operationalStatus=v;addTimeline(i,`Estado operativo: ${incidentStatusLabel(v)}`);save();$("#statusDialog").close();renderAll();toast("Estado actualizado")};
+
+$("#createIncidentBtn").onclick=()=>$("#incidentDialog").showModal();$("#closeDialog").onclick=$("#cancelDialog").onclick=()=>$("#incidentDialog").close();
+$("#geocodeAddress").onclick=async()=>{const q=$("#addressInput").value.trim();if(!q)return toast("Escriba una dirección");toast("Buscando ubicación...");const p=await geocode(q);if(!p)return toast("No se encontró la dirección");$("#latInput").value=p.lat;$("#lngInput").value=p.lng;toast("Dirección geolocalizada")};
+$("#incidentForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),id=`INC-${new Date().getFullYear()}-${String(data.incidents.length+1).padStart(4,"0")}`;const i={operationalStatus:"received",id,caller:f.get("caller"),document:f.get("document"),type:f.get("type"),priority:f.get("priority"),status:"open",createdAt:new Date().toISOString(),address:f.get("address"),lat:+f.get("lat"),lng:+f.get("lng"),description:f.get("description"),notes:"",assigned:[],timeline:[["Incidente creado",new Date().toISOString()],["Dirección geolocalizada",new Date().toISOString()]]};data.incidents.unshift(i);selectedId=id;statusFilter="open";save();e.target.reset();$("#incidentDialog").close();renderAll();toast("Incidente creado")};
+$("#searchPoi").onclick=async()=>{
+ const q=$("#poiSearch").value.trim();if(!q)return toast("Escriba un término de búsqueda");
+ const local=data.pois.filter(p=>`${p.name} ${p.category} ${p.address}`.toLowerCase().includes(q.toLowerCase()));
+ let external=[];
+ if($("#externalPoi").checked){
+  try{
+   const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=8&countrycodes=mx&q=${encodeURIComponent(q)}`,{headers:{"Accept-Language":"es"}});
+   const j=await r.json();external=j.map(x=>({name:x.display_name.split(",")[0],category:x.type||x.class,lat:+x.lat,lng:+x.lon,address:x.display_name}));
+  }catch(e){toast("No fue posible consultar OpenStreetMap; se muestran resultados locales")}
+ }
+ const merged=[...local,...external].filter((x,idx,arr)=>arr.findIndex(y=>Math.abs(y.lat-x.lat)<.00001&&Math.abs(y.lng-x.lng)<.00001)===idx);
+ $("#poiResults").innerHTML=merged.map(p=>`<div class="poi-card"><div><b>${p.name}</b><br><small>${p.category} · ${p.address}</small></div><button data-lat="${p.lat}" data-lng="${p.lng}" data-name="${p.name}" data-address="${String(p.address).replace(/"/g,"&quot;")}">Usar</button></div>`).join("")||`<p class="hint">Sin resultados.</p>`;
+ $$(".poi-card button").forEach(b=>b.onclick=()=>{const i=selected();i.lat=+b.dataset.lat;i.lng=+b.dataset.lng;i.address=b.dataset.address||b.dataset.name;addTimeline(i,`Ubicación definida mediante POI: ${b.dataset.name}`);save();renderAll();toast("Ubicación actualizada")});
+};
+
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function initials(n){return String(n||"?").split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase()}
+function personPhotoSvg(p){
+ const init=initials(p.name),variant=String(p.document||"0").split("").reduce((a,n)=>a+(+n||0),0)%5,bg=["#253247","#2d3545","#263c3d","#423548","#3b3a2d"][variant];
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="180" height="220"><rect width="180" height="220" rx="12" fill="${bg}"/><circle cx="90" cy="73" r="39" fill="#9aa6b5"/><path d="M28 210c7-49 30-75 62-75s55 26 62 75" fill="#9aa6b5"/><circle cx="76" cy="68" r="4" fill="#25303c"/><circle cx="104" cy="68" r="4" fill="#25303c"/><path d="M76 90c10 8 18 8 28 0" fill="none" stroke="#25303c" stroke-width="4" stroke-linecap="round"/><rect x="8" y="181" width="164" height="31" rx="8" fill="rgba(11,17,27,.78)"/><text x="90" y="203" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#fff">${init}</text></svg>`;
+ return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+function formatDateId(d){if(!d)return "No registrada";const p=String(d).split("-");return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d}
+
+$("#searchPerson").onclick=()=>{
+ const raw=$("#personSearch").value.trim(),norm=raw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""),digits=raw.replace(/\D/g,"");
+ if(!raw){$("#personResult").className="person-result empty";$("#personResult").textContent="Escriba al menos un número o una letra.";return}
+ const registry=new Map();data.people.forEach(p=>registry.set(p.document,{...p,incidents:[...(p.incidents||[])]}));
+ data.incidents.forEach(i=>{const key=i.document||`name:${i.caller}`,p=registry.get(key)||{document:i.document||"No registrado",name:i.caller,phone:"No registrado",address:i.address||"No registrada",alerts:"Sin alertas",birthDate:"No registrada",nationality:"N/D",sex:"N/D",validUntil:"N/D",incidents:[]};if(!p.incidents.includes(i.id))p.incidents.push(i.id);registry.set(key,p)});
+ const results=[...registry.values()].filter(p=>{const name=(p.name||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""),doc=String(p.document||"").replace(/\D/g,"");return name.includes(norm)||(digits&&doc.includes(digits))}).sort((a,b)=>{const ad=digits&&String(a.document).startsWith(digits)?0:1,bd=digits&&String(b.document).startsWith(digits)?0:1;if(ad!==bd)return ad-bd;return a.name.localeCompare(b.name,"es")}).slice(0,30);
+ if(!results.length){$("#personResult").className="person-result empty";$("#personResult").textContent=`No se encontraron coincidencias para "${raw}".`;return}
+ $("#personResult").className="person-result";
+ $("#personResult").innerHTML=`<div class="search-summary">${results.length} coincidencia${results.length===1?"":"s"} para <b>${escapeHtml(raw)}</b></div><div class="person-results-list">${results.map(p=>`<article class="identity-card"><div class="identity-card-top"><div><div class="identity-country">REGISTRO NACIONAL · DOCUMENTO SIMULADO</div><div class="identity-title">Documento de identidad</div></div><div class="identity-chip">ID</div></div><div class="identity-card-body"><img class="identity-photo" src="${personPhotoSvg(p)}" alt="Fotografía simulada"><div class="identity-data"><div class="identity-name">${escapeHtml(p.name)}</div><div class="identity-number">${escapeHtml(p.document)}</div><div class="identity-grid"><div><small>Nacimiento</small><b>${escapeHtml(formatDateId(p.birthDate))}</b></div><div><small>Sexo</small><b>${escapeHtml(p.sex)}</b></div><div><small>Nacionalidad</small><b>${escapeHtml(p.nationality)}</b></div><div><small>Vigencia</small><b>${escapeHtml(formatDateId(p.validUntil))}</b></div></div><div class="identity-contact"><div><small>Teléfono</small><b>${escapeHtml(p.phone)}</b></div><div><small>Domicilio</small><b>${escapeHtml(p.address)}</b></div><div><small>Alertas</small><b>${escapeHtml(p.alerts)}</b></div><div><small>Incidentes relacionados</small><b>${escapeHtml((p.incidents||[]).join(", ")||"Ninguno")}</b></div></div></div></div><div class="identity-footer"><span>DATOS FICTICIOS PARA DEMOSTRACIÓN</span><span class="identity-machine">${escapeHtml(String(p.document).padEnd(11,"<"))}&lt;&lt;${escapeHtml(initials(p.name))}</span></div></article>`).join("")}</div>`;
+};
+$("#personSearch").addEventListener("input",()=>{
+ const value=$("#personSearch").value.trim();
+ if(value.length>=1)$("#searchPerson").click();
+ else{
+  $("#personResult").className="person-result empty";
+  $("#personResult").textContent="Ingrese un nombre, DNI o CPF. La búsqueda comienza desde el primer carácter.";
+ }
+});
+
+$("#showIncidents").onchange=renderMaps;$("#showUnits").onchange=renderMaps;
+$("#exportPdfQuick").onclick=$("#reportSelectedPdf").onclick=()=>exportPdf(false);$("#exportXlsxQuick").onclick=$("#reportSelectedXlsx").onclick=()=>exportXlsx(false);$("#reportAllPdf").onclick=()=>exportPdf(true);$("#reportAllXlsx").onclick=()=>exportXlsx(true);
+$("#themeToggle").onclick=()=>document.body.classList.toggle("light");
+$("#resetDemo").onclick=()=>{if(confirm("¿Restablecer todos los datos de demostración?")){data=structuredClone(seed);save();selectedId=data.incidents[0].id;renderAll();toast("Demo restablecida")}};
+setInterval(()=>{data.units.forEach(u=>{if(u.operationalState==="disponible"||u.operationalState==="en_ruta"){u.lat+=(Math.random()-.5)*.001;u.lng+=(Math.random()-.5)*.001;u.heading=(u.heading+Math.round((Math.random()-.5)*30)+360)%360}});save();renderMaps();renderResources()},8000);
+window.addEventListener("DOMContentLoaded",()=>{
+ const resetBtn=$("#resetDemoData");
+ if(resetBtn)resetBtn.onclick=()=>{localStorage.removeItem(STORAGE_KEY);location.reload()};
+ document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-person-example]");
+  if(!b)return;
+  $("#personSearch").value=b.dataset.personExample;
+  $("#searchPerson").click();
+ });
+
+ ensureSchema();save();initMaps();renderAll();
+ const peopleNav=document.querySelector('[data-view="people"]');
+ if(peopleNav){
+  peopleNav.addEventListener("click",()=>{
+   setTimeout(()=>{
+    if(!$("#personSearch").value.trim()){
+     $("#personSearch").value="Daniel";
+     $("#searchPerson").click();
+    }
+   },100);
+  });
+ }
+});

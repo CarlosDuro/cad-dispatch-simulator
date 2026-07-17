@@ -2,20 +2,20 @@ const STORAGE_KEY="n11-dispatch-v2";
 const baseLat=19.4326,baseLng=-99.1332;
 const seed={
  incidents:[
- {id:"INC-2026-0005",caller:"Daniel Bello",document:"12345678901",type:"Extorsión telefónica",priority:"medium",status:"open",createdAt:"2026-01-26T15:02:40",address:"Av. Juárez 50, Centro",lat:19.4355,lng:-99.1412,description:"Se investiga posible extorsión telefónica; la persona reportante identificó al presunto responsable.",notes:"Solicitante permanece en línea.",assigned:["P-014"],timeline:[["Incidente creado","2026-01-26T15:02:40"],["Dirección geolocalizada","2026-01-26T15:03:00"],["Unidad P-014 despachada","2026-01-26T15:04:15"]]},
- {id:"INC-2026-0004",caller:"Diego Piero",document:"98765432100",type:"Abuso de confianza",priority:"medium",status:"open",createdAt:"2026-01-26T15:01:15",address:"C. Libertad 114",lat:19.428,lng:-99.121,description:"Posible abuso de confianza relacionado con faltante de mercancía en comercio.",notes:"",assigned:[],timeline:[["Incidente creado","2026-01-26T15:01:15"],["Solicitante validado","2026-01-26T15:02:10"]]},
- {id:"INC-2026-0003",caller:"Lorenzo Bustamante",document:"45678912300",type:"Ahogamiento",priority:"high",status:"open",createdAt:"2026-01-26T14:59:40",address:"Bosque de Chapultepec",lat:19.4204,lng:-99.1819,description:"Persona con dificultad respiratoria en cuerpo de agua. Atención médica inmediata.",notes:"Protocolo médico activado.",assigned:["AMB-07"],timeline:[["Incidente creado","2026-01-26T14:59:40"],["Prioridad alta validada","2026-01-26T15:00:01"],["AMB-07 despachada","2026-01-26T15:00:22"]]},
- {id:"INC-2026-0002",caller:"Lorena Palacios",document:"74185296300",type:"Asfixia",priority:"high",status:"open",createdAt:"2026-01-26T14:58:16",address:"Roma Norte",lat:19.4177,lng:-99.1622,description:"Paciente consciente con obstrucción parcial de vía aérea.",notes:"Se brindan instrucciones telefónicas.",assigned:["AMB-11"],timeline:[["Incidente creado","2026-01-26T14:58:16"],["Instrucciones de primeros auxilios","2026-01-26T14:58:50"],["AMB-11 despachada","2026-01-26T14:59:04"]]},
- {id:"INC-2026-0001",caller:"Mario Leal",document:"36925814700",type:"Accidente ferroviario",priority:"high",status:"closed",createdAt:"2026-01-26T14:55:19",closedAt:"2026-01-26T16:20:00",address:"Buenavista",lat:19.446,lng:-99.1525,description:"Incidente en vía férrea con posible víctima.",notes:"Atención concluida.",assigned:["P-022","AMB-03"],timeline:[["Incidente creado","2026-01-26T14:55:19"],["Policía y ambulancia notificadas","2026-01-26T14:55:44"],["Incidente cerrado","2026-01-26T16:20:00"]]}
+ {operationalStatus:"responding",id:"INC-2026-0005",caller:"Daniel Bello",document:"12345678901",type:"Extorsión telefónica",priority:"medium",status:"open",createdAt:"2026-01-26T15:02:40",address:"Av. Juárez 50, Centro",lat:19.4355,lng:-99.1412,description:"Se investiga posible extorsión telefónica; la persona reportante identificó al presunto responsable.",notes:"Solicitante permanece en línea.",assigned:["P-014"],timeline:[["Incidente creado","2026-01-26T15:02:40"],["Dirección geolocalizada","2026-01-26T15:03:00"],["Unidad P-014 despachada","2026-01-26T15:04:15"]]},
+ {operationalStatus:"validated",id:"INC-2026-0004",caller:"Diego Piero",document:"98765432100",type:"Abuso de confianza",priority:"medium",status:"open",createdAt:"2026-01-26T15:01:15",address:"C. Libertad 114",lat:19.428,lng:-99.121,description:"Posible abuso de confianza relacionado con faltante de mercancía en comercio.",notes:"",assigned:[],timeline:[["Incidente creado","2026-01-26T15:01:15"],["Solicitante validado","2026-01-26T15:02:10"]]},
+ {operationalStatus:"responding",id:"INC-2026-0003",caller:"Lorenzo Bustamante",document:"45678912300",type:"Ahogamiento",priority:"high",status:"open",createdAt:"2026-01-26T14:59:40",address:"Bosque de Chapultepec",lat:19.4204,lng:-99.1819,description:"Persona con dificultad respiratoria en cuerpo de agua. Atención médica inmediata.",notes:"Protocolo médico activado.",assigned:["AMB-07"],timeline:[["Incidente creado","2026-01-26T14:59:40"],["Prioridad alta validada","2026-01-26T15:00:01"],["AMB-07 despachada","2026-01-26T15:00:22"]]},
+ {operationalStatus:"responding",id:"INC-2026-0002",caller:"Lorena Palacios",document:"74185296300",type:"Asfixia",priority:"high",status:"open",createdAt:"2026-01-26T14:58:16",address:"Roma Norte",lat:19.4177,lng:-99.1622,description:"Paciente consciente con obstrucción parcial de vía aérea.",notes:"Se brindan instrucciones telefónicas.",assigned:["AMB-11"],timeline:[["Incidente creado","2026-01-26T14:58:16"],["Instrucciones de primeros auxilios","2026-01-26T14:58:50"],["AMB-11 despachada","2026-01-26T14:59:04"]]},
+ {operationalStatus:"resolved",id:"INC-2026-0001",caller:"Mario Leal",document:"36925814700",type:"Accidente ferroviario",priority:"high",status:"closed",createdAt:"2026-01-26T14:55:19",closedAt:"2026-01-26T16:20:00",address:"Buenavista",lat:19.446,lng:-99.1525,description:"Incidente en vía férrea con posible víctima.",notes:"Atención concluida.",assigned:["P-022","AMB-03"],timeline:[["Incidente creado","2026-01-26T14:55:19"],["Policía y ambulancia notificadas","2026-01-26T14:55:44"],["Incidente cerrado","2026-01-26T16:20:00"]]}
  ],
  units:[
- {id:"P-014",name:"Patrulla P-014",type:"Policía",status:"busy",lat:19.437,lng:-99.143},
- {id:"P-022",name:"Patrulla P-022",type:"Policía",status:"available",lat:19.445,lng:-99.128},
- {id:"P-031",name:"Patrulla P-031",type:"Policía",status:"available",lat:19.424,lng:-99.15},
- {id:"AMB-03",name:"Ambulancia AMB-03",type:"Ambulancia",status:"available",lat:19.431,lng:-99.112},
- {id:"AMB-07",name:"Ambulancia AMB-07",type:"Ambulancia",status:"busy",lat:19.421,lng:-99.177},
- {id:"AMB-11",name:"Ambulancia AMB-11",type:"Ambulancia",status:"busy",lat:19.418,lng:-99.16},
- {id:"BOM-02",name:"Bomberos BOM-02",type:"Bomberos",status:"available",lat:19.44,lng:-99.17}
+ {id:"P-014",name:"Patrulla P-014",type:"Policía",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.437,lng:-99.143},
+ {id:"P-022",name:"Patrulla P-022",type:"Policía",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.445,lng:-99.128},
+ {id:"P-031",name:"Patrulla P-031",type:"Policía",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.424,lng:-99.15},
+ {id:"AMB-03",name:"Ambulancia AMB-03",type:"Ambulancia",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.431,lng:-99.112},
+ {id:"AMB-07",name:"Ambulancia AMB-07",type:"Ambulancia",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.421,lng:-99.177},
+ {id:"AMB-11",name:"Ambulancia AMB-11",type:"Ambulancia",status:"busy",operationalState:"en_escena",heading:45,speed:0,lat:19.418,lng:-99.16},
+ {id:"BOM-02",name:"Bomberos BOM-02",type:"Bomberos",status:"available",operationalState:"disponible",heading:90,speed:22,lat:19.44,lng:-99.17}
  ],
  people:[
  {document:"12345678901",name:"Daniel Bello",phone:"+52 55 1000 0001",address:"Av. Juárez 50, Centro",alerts:"Reporte previo de extorsión",incidents:["INC-2026-0005"]},
@@ -39,6 +39,12 @@ function selected(){return data.incidents.find(i=>i.id===selectedId)||data.incid
 function fmt(d){return new Date(d).toLocaleString("es-MX")}
 function km(a,b,c,d){const R=6371,p=Math.PI/180,x=(c-a)*p,y=(d-b)*p;const q=Math.sin(x/2)**2+Math.cos(a*p)*Math.cos(c*p)*Math.sin(y/2)**2;return 2*R*Math.asin(Math.sqrt(q))}
 function priorityLabel(p){return {high:"PRIORIDAD ALTA",medium:"PRIORIDAD MEDIA",low:"PRIORIDAD BAJA"}[p]}
+function incidentStatusLabel(s){return {received:"Recibido",validated:"Validado",dispatching:"En despacho",responding:"En atención",resolved:"Resuelto"}[s]||"Recibido"}
+function unitStateLabel(s){return {disponible:"Disponible",despachada:"Despachada",en_ruta:"En ruta",en_escena:"En escena",fuera_servicio:"Fuera de servicio"}[s]||s}
+function ensureSchema(){
+ data.incidents.forEach(i=>{if(!i.operationalStatus)i.operationalStatus=i.status==="closed"?"resolved":"received"});
+ data.units.forEach(u=>{if(!u.operationalState)u.operationalState=u.status==="available"?"disponible":"despachada";if(u.heading==null)u.heading=0;if(u.speed==null)u.speed=0});
+}
 function addTimeline(i,text){i.timeline.push([text,new Date().toISOString()])}
 function initMaps(){
  dispatchMap=L.map("dispatchMap").setView([baseLat,baseLng],13);
@@ -69,21 +75,42 @@ function renderIncidents(){
 }
 function renderDetails(){
  const i=selected();$("#detailCode").textContent=i.id;$("#detailDescription").value=i.description;$("#detailNotes").value=i.notes||"";
- const fields=[["Estado",i.status==="open"?"En curso":"Completado"],["Tipo",i.type],["Prioridad",priorityLabel(i.priority)],["Solicitante",i.caller],["DNI / CPF",i.document],["Fecha y hora",fmt(i.createdAt)],["Ubicación",i.address],["Unidades",i.assigned.join(", ")||"Sin asignar"]];
+ const fields=[["Estado general",i.status==="open"?"En curso":"Completado"],["Estado operativo",incidentStatusLabel(i.operationalStatus)],["Tipo",i.type],["Prioridad",priorityLabel(i.priority)],["Solicitante",i.caller],["DNI / CPF",i.document],["Fecha y hora",fmt(i.createdAt)],["Ubicación",i.address],["Unidades",i.assigned.join(", ")||"Sin asignar"]];
  $("#detailInfo").innerHTML=fields.map(([a,b])=>`<div class="info-item"><small>${a}</small><strong>${b}</strong></div>`).join("");
  $("#timeline").innerHTML=i.timeline.slice().reverse().map(([a,b])=>`<div class="timeline-item"><span class="timeline-dot"></span><div><strong>${a}</strong><small>${fmt(b)}</small></div></div>`).join("")
 }
 function renderResources(){
  const i=selected();
- $("#unitSelect").innerHTML=`<option value="">Seleccione una unidad</option>`+data.units.map(u=>`<option value="${u.id}">${u.name} · ${u.status==="available"?"Disponible":"Ocupada"}</option>`).join("");
- $("#unitList").innerHTML=data.units.map(u=>`<div class="unit-card"><div><span class="status-dot ${u.status}"></span><b>${u.name}</b><br><small>${u.type} · ${km(i.lat,i.lng,u.lat,u.lng).toFixed(2)} km</small></div><small>${i.assigned.includes(u.id)?"Asignada":u.status==="available"?"Disponible":"Ocupada"}</small></div>`).join("");
- const rec=data.units.filter(u=>u.status==="available").map(u=>({...u,d:km(i.lat,i.lng,u.lat,u.lng)})).sort((a,b)=>a.d-b.d);
- $("#recommendList").innerHTML=rec.map((u,n)=>`<div class="recommend-card"><div><b>#${n+1} ${u.name}</b><br><small>${u.type} · ${u.d.toFixed(2)} km</small></div><button class="primary quick-dispatch" data-unit="${u.id}">Despachar</button></div>`).join("")||`<p class="hint">No hay unidades disponibles.</p>`;
- $$(".quick-dispatch").forEach(b=>b.onclick=()=>dispatch(b.dataset.unit))
+ const available=data.units.filter(u=>u.operationalState==="disponible");
+ $("#unitSelect").innerHTML=`<option value="">Seleccione una unidad disponible</option>`+available.map(u=>`<option value="${u.id}">${u.name} · ${u.type}</option>`).join("");
+ const assigned=data.units.filter(u=>i.assigned.includes(u.id));
+ $("#assignedUnitSelect").innerHTML=`<option value="">Seleccione una unidad asignada</option>`+assigned.map(u=>`<option value="${u.id}">${u.name} · ${unitStateLabel(u.operationalState)}</option>`).join("");
+ $("#unitList").innerHTML=data.units.map(u=>`<div class="unit-card"><div><span class="status-dot ${u.status}"></span><b>${u.name}</b><br><small>${u.type} · ${km(i.lat,i.lng,u.lat,u.lng).toFixed(2)} km · ${unitStateLabel(u.operationalState)}</small></div><small>GPS ${u.lat.toFixed(4)}, ${u.lng.toFixed(4)}<br>${u.speed||0} km/h · rumbo ${Math.round(u.heading||0)}°</small></div>`).join("");
+ const rec=available.map(u=>({...u,d:km(i.lat,i.lng,u.lat,u.lng)})).sort((a,b)=>a.d-b.d);
+ $("#recommendList").innerHTML=rec.map((u,n)=>`<div class="recommend-card"><div><b>#${n+1} ${u.name}</b><br><small>${u.type} · ${u.d.toFixed(2)} km en línea recta</small><div class="route-meta" id="route-${u.id}">Calculando ruta y ETA...</div></div><button class="primary quick-dispatch" data-unit="${u.id}">Despachar</button></div>`).join("")||`<p class="hint">No hay unidades disponibles.</p>`;
+ $$(".quick-dispatch").forEach(b=>b.onclick=()=>dispatch(b.dataset.unit));
+ rec.slice(0,5).forEach(u=>calculateRoute(u,i));
+}
+async function calculateRoute(u,i){
+ const el=document.getElementById(`route-${u.id}`);if(!el)return;
+ try{
+  const url=`https://router.project-osrm.org/route/v1/driving/${u.lng},${u.lat};${i.lng},${i.lat}?overview=false`;
+  const r=await fetch(url);const j=await r.json();
+  if(j.routes&&j.routes[0]){
+   const route=j.routes[0],mins=Math.max(1,Math.round(route.duration/60));
+   el.textContent=`Ruta vial: ${(route.distance/1000).toFixed(2)} km · ETA ${mins} min`;
+  }else throw new Error("sin ruta");
+ }catch(e){
+  const d=km(i.lat,i.lng,u.lat,u.lng);el.textContent=`Estimación directa: ${d.toFixed(2)} km · ETA ${Math.max(1,Math.round(d/35*60))} min`;
+ }
 }
 function dispatch(id){
- const i=selected(),u=data.units.find(x=>x.id===id);if(!u)return toast("Seleccione una unidad");if(u.status!=="available"&&!i.assigned.includes(id))return toast("La unidad no está disponible");if(i.assigned.includes(id))return toast("La unidad ya está asignada");
- u.status="busy";i.assigned.push(id);addTimeline(i,`Unidad ${id} despachada al incidente`);save();renderAll();toast(`${id} despachada`)
+ const i=selected(),u=data.units.find(x=>x.id===id);
+ if(!u)return toast("Seleccione una unidad");
+ if(u.operationalState!=="disponible"&&!i.assigned.includes(id))return toast("La unidad no está disponible");
+ if(i.assigned.includes(id))return toast("La unidad ya está asignada");
+ u.status="busy";u.operationalState="despachada";u.speed=0;i.operationalStatus="dispatching";i.assigned.push(id);
+ addTimeline(i,`Unidad ${id} despachada al incidente`);save();renderAll();toast(`${id} despachada`);
 }
 function renderDashboard(){
  const open=data.incidents.filter(i=>i.status==="open").length,closed=data.incidents.length-open,available=data.units.filter(u=>u.status==="available").length;
@@ -102,6 +129,7 @@ function renderCoverage(){
 }
 function renderAll(){renderIncidents();renderDetails();renderResources();renderDashboard();renderCoverage();renderMaps()}
 function exportPdf(all=false){
+ if(!all&&selected().status!=="closed")return toast("Finalice el incidente antes de descargar su informe");
  const arr=all?data.incidents:[selected()];const {jsPDF}=window.jspdf;const doc=new jsPDF();let y=15;
  doc.setFontSize(16);doc.text(all?"Historial de incidentes":"Informe de incidente",14,y);y+=10;
  arr.forEach((i,idx)=>{if(y>260){doc.addPage();y=15}doc.setFontSize(11);doc.text(`${i.id} - ${i.type}`,14,y);y+=6;doc.setFontSize(9);
@@ -110,6 +138,7 @@ function exportPdf(all=false){
  doc.save(all?"historial-incidentes.pdf":`${selected().id}.pdf`)
 }
 function exportXlsx(all=false){
+ if(!all&&selected().status!=="closed")return toast("Finalice el incidente antes de descargar su informe");
  const arr=all?data.incidents:[selected()];const rows=arr.map(i=>({Codigo:i.id,Estado:i.status,Tipo:i.type,Prioridad:priorityLabel(i.priority),Solicitante:i.caller,Documento:i.document,Fecha:fmt(i.createdAt),Ubicacion:i.address,Latitud:i.lat,Longitud:i.lng,Unidades:i.assigned.join(", "),Descripcion:i.description,Notas:i.notes,Cronologia:i.timeline.map(t=>`${fmt(t[1])}: ${t[0]}`).join(" | ")}));
  const ws=XLSX.utils.json_to_sheet(rows),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Incidentes");XLSX.writeFile(wb,all?"historial-incidentes.xlsx":`${selected().id}.xlsx`)
 }
@@ -131,15 +160,131 @@ $("#locateUnit").onclick=()=>{const u=data.units.find(x=>x.id===$("#unitSelect")
 $("#addNote").onclick=()=>{const v=$("#newNote").value.trim();if(!v)return;const i=selected();i.notes+=(i.notes?"\n":"")+v;addTimeline(i,`Nota: ${v}`);$("#newNote").value="";save();renderAll()};
 $("#detailDescription").onchange=e=>{selected().description=e.target.value;save();renderIncidents()};
 $("#detailNotes").onchange=e=>{selected().notes=e.target.value;save()};
-$("#closeIncident").onclick=()=>{const i=selected();if(i.status==="closed")return toast("El incidente ya está cerrado");i.status="closed";i.closedAt=new Date().toISOString();addTimeline(i,"Incidente cerrado");i.assigned.forEach(id=>{const u=data.units.find(x=>x.id===id);if(u)u.status="available"});save();statusFilter="open";selectedId=data.incidents.find(x=>x.status==="open")?.id||i.id;renderAll();toast("Incidente completado")};
+$("#closeIncident").onclick=()=>{const i=selected();if(i.status==="closed")return toast("El incidente ya está cerrado");i.status="closed";i.operationalStatus="resolved";i.closedAt=new Date().toISOString();addTimeline(i,"Incidente cerrado");i.assigned.forEach(id=>{const u=data.units.find(x=>x.id===id);if(u){u.status="available";u.operationalState="disponible";u.speed=18}});save();statusFilter="open";selectedId=data.incidents.find(x=>x.status==="open")?.id||i.id;renderAll();toast("Incidente completado")};
+$("#advanceUnitState").onclick=()=>{
+ const id=$("#assignedUnitSelect").value,u=data.units.find(x=>x.id===id),i=selected();
+ if(!u)return toast("Seleccione una unidad asignada");
+ const next={despachada:"en_ruta",en_ruta:"en_escena",en_escena:"en_escena"}[u.operationalState]||"en_ruta";
+ if(next===u.operationalState)return toast("La unidad ya se encuentra en escena");
+ u.operationalState=next;u.speed=next==="en_ruta"?35:0;
+ if(next==="en_ruta")i.operationalStatus="responding";
+ addTimeline(i,`Unidad ${u.id}: ${unitStateLabel(next)}`);save();renderAll();toast(`${u.id}: ${unitStateLabel(next)}`);
+};
+$("#releaseUnit").onclick=()=>{
+ const id=$("#assignedUnitSelect").value,u=data.units.find(x=>x.id===id),i=selected();
+ if(!u)return toast("Seleccione una unidad asignada");
+ u.status="available";u.operationalState="disponible";u.speed=20;
+ i.assigned=i.assigned.filter(x=>x!==id);addTimeline(i,`Unidad ${id} liberada y disponible`);save();renderAll();toast(`${id} liberada`);
+};
+$("#changeStatus").onclick=()=>{const i=selected();$("#incidentStatusSelect").value=i.operationalStatus||"received";$("#statusDialog").showModal()};
+$("#closeStatusDialog").onclick=$("#cancelStatusDialog").onclick=()=>$("#statusDialog").close();
+$("#statusForm").onsubmit=e=>{e.preventDefault();const i=selected(),v=$("#incidentStatusSelect").value;i.operationalStatus=v;addTimeline(i,`Estado operativo: ${incidentStatusLabel(v)}`);save();$("#statusDialog").close();renderAll();toast("Estado actualizado")};
+
 $("#createIncidentBtn").onclick=()=>$("#incidentDialog").showModal();$("#closeDialog").onclick=$("#cancelDialog").onclick=()=>$("#incidentDialog").close();
 $("#geocodeAddress").onclick=async()=>{const q=$("#addressInput").value.trim();if(!q)return toast("Escriba una dirección");toast("Buscando ubicación...");const p=await geocode(q);if(!p)return toast("No se encontró la dirección");$("#latInput").value=p.lat;$("#lngInput").value=p.lng;toast("Dirección geolocalizada")};
-$("#incidentForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),id=`INC-${new Date().getFullYear()}-${String(data.incidents.length+1).padStart(4,"0")}`;const i={id,caller:f.get("caller"),document:f.get("document"),type:f.get("type"),priority:f.get("priority"),status:"open",createdAt:new Date().toISOString(),address:f.get("address"),lat:+f.get("lat"),lng:+f.get("lng"),description:f.get("description"),notes:"",assigned:[],timeline:[["Incidente creado",new Date().toISOString()],["Dirección geolocalizada",new Date().toISOString()]]};data.incidents.unshift(i);selectedId=id;statusFilter="open";save();e.target.reset();$("#incidentDialog").close();renderAll();toast("Incidente creado")};
-$("#searchPoi").onclick=()=>{const q=$("#poiSearch").value.toLowerCase();const r=data.pois.filter(p=>`${p.name} ${p.category} ${p.address}`.toLowerCase().includes(q));$("#poiResults").innerHTML=r.map(p=>`<div class="poi-card"><div><b>${p.name}</b><br><small>${p.category} · ${p.address}</small></div><button data-lat="${p.lat}" data-lng="${p.lng}" data-name="${p.name}">Usar</button></div>`).join("")||`<p class="hint">Sin resultados.</p>`;$$(".poi-card button").forEach(b=>b.onclick=()=>{const i=selected();i.lat=+b.dataset.lat;i.lng=+b.dataset.lng;i.address=b.dataset.name;addTimeline(i,`Ubicación definida mediante POI: ${b.dataset.name}`);save();renderAll();toast("Ubicación actualizada")})};
-$("#searchPerson").onclick=()=>{const q=$("#personSearch").value.replace(/\D/g,""),p=data.people.find(x=>x.document===q)||data.incidents.find(x=>x.document===q);if(!p){$("#personResult").className="person-result empty";$("#personResult").textContent="No se encontró una persona con ese DNI/CPF.";return}const incidents=p.incidents||data.incidents.filter(i=>i.document===q).map(i=>i.id);$("#personResult").className="person-result";$("#personResult").innerHTML=`<div class="person-grid"><div><small>Nombre</small><b>${p.name||p.caller}</b></div><div><small>DNI / CPF</small><b>${q}</b></div><div><small>Teléfono</small><b>${p.phone||"No registrado"}</b></div><div><small>Dirección</small><b>${p.address||"No registrada"}</b></div><div><small>Alertas</small><b>${p.alerts||"Sin alertas"}</b></div><div><small>Incidentes</small><b>${incidents.join(", ")||"Ninguno"}</b></div></div>`};
+$("#incidentForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),id=`INC-${new Date().getFullYear()}-${String(data.incidents.length+1).padStart(4,"0")}`;const i={operationalStatus:"received",id,caller:f.get("caller"),document:f.get("document"),type:f.get("type"),priority:f.get("priority"),status:"open",createdAt:new Date().toISOString(),address:f.get("address"),lat:+f.get("lat"),lng:+f.get("lng"),description:f.get("description"),notes:"",assigned:[],timeline:[["Incidente creado",new Date().toISOString()],["Dirección geolocalizada",new Date().toISOString()]]};data.incidents.unshift(i);selectedId=id;statusFilter="open";save();e.target.reset();$("#incidentDialog").close();renderAll();toast("Incidente creado")};
+$("#searchPoi").onclick=async()=>{
+ const q=$("#poiSearch").value.trim();if(!q)return toast("Escriba un término de búsqueda");
+ const local=data.pois.filter(p=>`${p.name} ${p.category} ${p.address}`.toLowerCase().includes(q.toLowerCase()));
+ let external=[];
+ if($("#externalPoi").checked){
+  try{
+   const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=8&countrycodes=mx&q=${encodeURIComponent(q)}`,{headers:{"Accept-Language":"es"}});
+   const j=await r.json();external=j.map(x=>({name:x.display_name.split(",")[0],category:x.type||x.class,lat:+x.lat,lng:+x.lon,address:x.display_name}));
+  }catch(e){toast("No fue posible consultar OpenStreetMap; se muestran resultados locales")}
+ }
+ const merged=[...local,...external].filter((x,idx,arr)=>arr.findIndex(y=>Math.abs(y.lat-x.lat)<.00001&&Math.abs(y.lng-x.lng)<.00001)===idx);
+ $("#poiResults").innerHTML=merged.map(p=>`<div class="poi-card"><div><b>${p.name}</b><br><small>${p.category} · ${p.address}</small></div><button data-lat="${p.lat}" data-lng="${p.lng}" data-name="${p.name}" data-address="${String(p.address).replace(/"/g,"&quot;")}">Usar</button></div>`).join("")||`<p class="hint">Sin resultados.</p>`;
+ $$(".poi-card button").forEach(b=>b.onclick=()=>{const i=selected();i.lat=+b.dataset.lat;i.lng=+b.dataset.lng;i.address=b.dataset.address||b.dataset.name;addTimeline(i,`Ubicación definida mediante POI: ${b.dataset.name}`);save();renderAll();toast("Ubicación actualizada")});
+};
+$("#searchPerson").onclick=()=>{
+ const raw=$("#personSearch").value.trim();
+ const normalized=raw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+ const digits=raw.replace(/\D/g,"");
+
+ if(!raw){
+  $("#personResult").className="person-result empty";
+  $("#personResult").textContent="Escriba al menos un número o una letra para buscar.";
+  return;
+ }
+
+ const registry=new Map();
+
+ data.people.forEach(p=>{
+  registry.set(p.document,{
+   document:p.document,
+   name:p.name,
+   phone:p.phone||"No registrado",
+   address:p.address||"No registrada",
+   alerts:p.alerts||"Sin alertas",
+   incidents:[...(p.incidents||[])]
+  });
+ });
+
+ data.incidents.forEach(i=>{
+  const key=i.document||`name:${i.caller}`;
+  const current=registry.get(key)||{
+   document:i.document||"No registrado",
+   name:i.caller,
+   phone:"No registrado",
+   address:i.address||"No registrada",
+   alerts:"Sin alertas",
+   incidents:[]
+  };
+  if(!current.incidents.includes(i.id))current.incidents.push(i.id);
+  if(current.address==="No registrada"&&i.address)current.address=i.address;
+  registry.set(key,current);
+ });
+
+ const results=[...registry.values()].filter(p=>{
+  const name=(p.name||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const document=String(p.document||"").replace(/\D/g,"");
+  return name.includes(normalized) || (digits && document.includes(digits));
+ }).sort((a,b)=>{
+  const aDoc=String(a.document).startsWith(digits)?0:1;
+  const bDoc=String(b.document).startsWith(digits)?0:1;
+  if(aDoc!==bDoc)return aDoc-bDoc;
+  return a.name.localeCompare(b.name,"es");
+ });
+
+ if(!results.length){
+  $("#personResult").className="person-result empty";
+  $("#personResult").textContent=`No se encontraron coincidencias para "${raw}".`;
+  return;
+ }
+
+ $("#personResult").className="person-result";
+ $("#personResult").innerHTML=`
+  <div class="search-summary">${results.length} coincidencia${results.length===1?"":"s"} para <b>${raw}</b></div>
+  <div class="person-results-list">
+   ${results.map(p=>`
+    <article class="person-match">
+     <div class="person-match-head">
+      <div><strong>${p.name}</strong><small>DNI / CPF: ${p.document}</small></div>
+      <span>${p.incidents.length} incidente${p.incidents.length===1?"":"s"}</span>
+     </div>
+     <div class="person-grid">
+      <div><small>Teléfono</small><b>${p.phone}</b></div>
+      <div><small>Dirección</small><b>${p.address}</b></div>
+      <div><small>Alertas</small><b>${p.alerts}</b></div>
+      <div><small>Incidentes relacionados</small><b>${p.incidents.join(", ")||"Ninguno"}</b></div>
+     </div>
+    </article>`).join("")}
+  </div>`;
+};
+
+$("#personSearch").addEventListener("input",()=>{
+ const value=$("#personSearch").value.trim();
+ if(value.length>=1)$("#searchPerson").click();
+ else{
+  $("#personResult").className="person-result empty";
+  $("#personResult").textContent="Ingrese un nombre, DNI o CPF. La búsqueda comienza desde el primer carácter.";
+ }
+});
+
 $("#showIncidents").onchange=renderMaps;$("#showUnits").onchange=renderMaps;
 $("#exportPdfQuick").onclick=$("#reportSelectedPdf").onclick=()=>exportPdf(false);$("#exportXlsxQuick").onclick=$("#reportSelectedXlsx").onclick=()=>exportXlsx(false);$("#reportAllPdf").onclick=()=>exportPdf(true);$("#reportAllXlsx").onclick=()=>exportXlsx(true);
 $("#themeToggle").onclick=()=>document.body.classList.toggle("light");
 $("#resetDemo").onclick=()=>{if(confirm("¿Restablecer todos los datos de demostración?")){data=structuredClone(seed);save();selectedId=data.incidents[0].id;renderAll();toast("Demo restablecida")}};
-setInterval(()=>{data.units.forEach(u=>{if(u.status==="available"){u.lat+=(Math.random()-.5)*.001;u.lng+=(Math.random()-.5)*.001}});save();renderMaps();renderResources()},8000);
-window.addEventListener("DOMContentLoaded",()=>{initMaps();renderAll()});
+setInterval(()=>{data.units.forEach(u=>{if(u.operationalState==="disponible"||u.operationalState==="en_ruta"){u.lat+=(Math.random()-.5)*.001;u.lng+=(Math.random()-.5)*.001;u.heading=(u.heading+Math.round((Math.random()-.5)*30)+360)%360}});save();renderMaps();renderResources()},8000);
+window.addEventListener("DOMContentLoaded",()=>{ensureSchema();save();initMaps();renderAll()});

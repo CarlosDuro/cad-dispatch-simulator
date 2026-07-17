@@ -73,7 +73,8 @@
                   <h2 id="detailCode">—</h2>
                 </div>
                 <div class="detail-buttons">
-                  <button id="closeIncident" title="Cerrar incidente">✓</button>
+                  <button id="changeStatus" title="Cambiar estado operativo">Estado</button>
+<button id="closeIncident" title="Finalizar incidente">✓ Finalizar</button>
                   <button id="exportPdfQuick" title="Exportar PDF">PDF</button>
                   <button id="exportXlsxQuick" title="Exportar XLSX">XLS</button>
                 </div>
@@ -105,11 +106,17 @@
             <button data-resource="pois">POI / GIS</button>
           </div>
           <div id="resource-units" class="resource-page active">
+<div class="unit-state-help">Estados: Disponible → Despachada → En ruta → En escena → Disponible</div>
             <div class="dispatch-controls">
               <select id="unitSelect"></select>
               <button class="primary" id="dispatchUnit">Despachar</button>
               <button id="locateUnit">Localizar</button>
             </div>
+<div class="dispatch-controls">
+<select id="assignedUnitSelect"></select>
+<button id="advanceUnitState">Avanzar estado</button>
+<button id="releaseUnit">Liberar</button>
+</div>
             <div class="unit-list" id="unitList"></div>
           </div>
           <div id="resource-recommend" class="resource-page">
@@ -118,9 +125,10 @@
           </div>
           <div id="resource-pois" class="resource-page">
             <div class="search-row">
-              <input id="poiSearch" placeholder="Escuela, hospital, estadio, monumento...">
-              <button id="searchPoi">Buscar</button>
-            </div>
+<input id="poiSearch" placeholder="Escriba nombre parcial: hospital, escuela, estadio...">
+<button id="searchPoi">Buscar</button>
+</div>
+<label class="external-check"><input type="checkbox" id="externalPoi" checked> Buscar también en OpenStreetMap</label>
             <div id="poiResults" class="poi-results"></div>
             <p class="hint">También puede hacer clic en el mapa para fijar la ubicación del incidente.</p>
           </div>
@@ -159,7 +167,7 @@
         <div class="page-heading"><div><h1>Búsqueda de personas</h1><p>Consulta por DNI o CPF con datos simulados.</p></div></div>
         <div class="panel people-panel">
           <div class="search-row">
-            <input id="personSearch" placeholder="Escriba DNI o CPF, por ejemplo 12345678901">
+            <input id="personSearch" placeholder="Buscar por nombre, DNI o CPF: 1, 12, 123, Daniel...">
             <button class="primary" id="searchPerson">Buscar</button>
           </div>
           <div id="personResult" class="person-result empty">Ingrese un documento para realizar la consulta.</div>
@@ -212,6 +220,25 @@
       <button type="button" id="cancelDialog">Cancelar</button>
       <button class="primary" type="submit">Crear incidente</button>
     </div>
+  </form>
+</dialog>
+
+
+<dialog id="statusDialog">
+  <form id="statusForm">
+    <header><div><h2>Estado del incidente</h2><p>Actualiza el flujo operativo.</p></div><button type="button" id="closeStatusDialog">×</button></header>
+    <div class="form-grid">
+      <label class="wide">Estado
+        <select id="incidentStatusSelect">
+          <option value="received">Recibido</option>
+          <option value="validated">Validado</option>
+          <option value="dispatching">En despacho</option>
+          <option value="responding">En atención</option>
+          <option value="resolved">Resuelto</option>
+        </select>
+      </label>
+    </div>
+    <div class="dialog-actions"><span></span><span></span><button type="button" id="cancelStatusDialog">Cancelar</button><button class="primary" type="submit">Guardar</button></div>
   </form>
 </dialog>
 

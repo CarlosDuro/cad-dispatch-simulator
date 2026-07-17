@@ -162,3 +162,8 @@ La pantalla Dispatch fue rediseñada para aproximarse a la referencia proporcion
 - Las unidades disponibles se desplazan continuamente por el mapa.
 - Las unidades en ruta avanzan hacia el incidente seleccionado y cambian automáticamente a “En escena” al llegar.
 - Posición, rumbo y velocidad se actualizan cada dos segundos.
+
+
+## Versión v16
+
+El logo vectorial fue sustituido por el logo exacto proporcionado en la captura del usuario. Se incluye como `n11-logo.png`.

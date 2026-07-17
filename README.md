@@ -96,3 +96,15 @@ Se ajustó el diseño para funcionar dentro de contenedores embebidos como SBO/O
 - Barra lateral compacta.
 - Mapa con altura adaptable.
 - Tablas y tarjetas con desplazamiento horizontal cuando es necesario.
+
+
+## Versión v9 — scroll de Dispatch
+
+Se corrigió el selector responsive para utilizar las clases reales del HTML (`.app`, `.main`, `#view-dispatch` y `.dispatch-grid`).
+
+La pantalla Dispatch ahora tiene un scroll general visible dentro del widget de Omniview/SBO:
+
+- Scroll vertical para llegar a unidades, notas y contenido inferior.
+- Scroll horizontal cuando el contenedor es más angosto que las tres columnas.
+- Barra superior fija dentro de la aplicación.
+- Los paneles ya no recortan el contenido antes de que actúe el scroll.

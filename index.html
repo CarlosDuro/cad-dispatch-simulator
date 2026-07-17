@@ -1,282 +1,225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Simulador visual de CAD y despacho de incidentes." />
-  <title>N11 CAD Simulator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Simulador web de CAD y despacho para demostraciones." />
+  <title>CAD Dispatch Simulator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">
-          <span></span><span></span><span></span>
-        </div>
-        <strong>N11</strong>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">N11</span><strong>CAD Simulator</strong></div>
+    <button class="nav active" data-view="dispatch">🚓 <span>Dispatch</span></button>
+    <button class="nav" data-view="dashboard">▦ <span>Dashboard</span></button>
+    <button class="nav" data-view="map">🗺️ <span>Mapa</span></button>
+    <button class="nav" data-view="people">👤 <span>Personas</span></button>
+    <button class="nav" data-view="reports">📄 <span>Reportes</span></button>
+    <div class="side-spacer"></div>
+    <button class="nav" id="resetDemo">↻ <span>Restablecer demo</span></button>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="crumb">🚓 Calltaker Dispatch <span>›</span> <strong id="currentTitle">Dispatch</strong></div>
+      <div class="top-actions">
+        <span class="live"><i></i> Simulación activa</span>
+        <button class="icon" id="themeToggle">☀</button>
       </div>
+    </header>
 
-      <nav class="nav">
-        <button class="nav-section" type="button">
-          <span class="nav-icon">🚓</span>
-          <span>Calltaker Dispatch</span>
-          <span class="chevron">⌃</span>
-        </button>
-        <button class="nav-item active" type="button" data-view="dispatch">
-          <span class="nav-icon">🚓</span><span>Dispatch</span>
-        </button>
-        <button class="nav-item" type="button" data-view="map">
-          <span class="nav-icon">🗺️</span><span>Map</span>
-        </button>
-      </nav>
-
-      <div class="sidebar-bottom">
-        <button id="collapseSidebar" class="icon-btn" type="button" aria-label="Contraer menú">«</button>
-        <button class="icon-btn" type="button" aria-label="Anclar menú">📌</button>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <div class="topbar-left">
-          <button class="icon-btn" type="button" aria-label="Menú">☰</button>
-          <button id="refreshButton" class="icon-btn" type="button" aria-label="Actualizar">↻</button>
-          <div class="breadcrumb">
-            <span>🚓</span>
-            <span>Calltaker Dispatch</span>
-            <span>›</span>
-            <strong>Dispatch</strong>
-          </div>
-        </div>
-
-        <div class="topbar-right">
-          <button class="icon-btn" type="button" aria-label="Configuración">⚙</button>
-          <button id="themeButton" class="icon-btn" type="button" aria-label="Tema">☀</button>
-          <button class="icon-btn" type="button" aria-label="Idioma">文</button>
-          <button class="icon-btn" type="button" aria-label="Pantalla completa">⛶</button>
-          <span class="online-dot" title="En línea"></span>
-        </div>
-      </header>
-
-      <section class="workspace" id="dispatchView">
-        <div class="panel incident-panel">
-          <div class="panel-header">
-            <h1>Dispatch</h1>
-            <div class="segmented">
-              <button class="segment active" type="button" data-status="dispatched">DISPATCHED</button>
-              <button class="segment" type="button" data-status="closed">CLOSED</button>
-            </div>
-            <button id="newIncidentButton" class="round-btn" type="button" title="Nuevo incidente">＋</button>
-            <button id="filterButton" class="round-btn" type="button" title="Filtrar">▽</button>
-          </div>
-
-          <div class="list-label">
-            <span>Emergency</span>
-            <span>↕</span>
-          </div>
-
-          <div id="incidentList" class="incident-list"></div>
-
-          <div class="pagination">
-            <span id="resultCount">Total 0</span>
-            <select aria-label="Resultados por página">
-              <option>10/page</option>
-            </select>
-            <button class="page-arrow" type="button">‹</button>
-            <button class="page-number active" type="button">1</button>
-            <button class="page-arrow" type="button">›</button>
-            <span>Go to</span>
-            <input value="1" aria-label="Ir a página" />
-          </div>
-        </div>
-
-        <div class="panel detail-panel">
-          <div class="detail-scroll">
-            <section class="card detail-card">
-              <div class="tab-title">⌂ Overview</div>
-              <div class="overview-body">
-                <div class="overview-top">
-                  <div id="incidentAvatar" class="incident-avatar">0</div>
-                  <div class="detail-actions">
-                    <div class="date-block">
-                      <strong id="detailDate">Invalid Date</strong>
-                      <small>(hace unos segundos)</small>
-                    </div>
-                    <button class="action blue" type="button" title="Vincular">⛓</button>
-                    <button class="action green" type="button" title="Cerrar">▣</button>
-                    <button class="action purple" type="button" title="Documento">▤</button>
-                    <button class="action lavender" type="button" title="Cronología">▣</button>
-                  </div>
-                </div>
-
-                <div class="field-row">
-                  <span class="field-label">STATUS:</span>
-                  <span class="field-label right">SUBCENTER:</span>
-                </div>
-                <textarea id="incidentDescription" placeholder="PLEASE INPUT..."></textarea>
-              </div>
-            </section>
-
-            <section class="card notes-card">
-              <h2>NOTAS</h2>
-              <textarea id="notesInput"></textarea>
-              <div class="message-box">
-                <input id="messageInput" placeholder="PLEASE INPUT" />
-                <button id="sendNoteButton" type="button">➤</button>
-              </div>
-            </section>
-
-            <section class="card timeline-card">
-              <div class="tab-title">Cronología</div>
-              <div id="timeline" class="timeline"></div>
-            </section>
-          </div>
-        </div>
-
-        <div class="panel map-panel">
-          <div class="map-tab-title">🚓 Dispatch</div>
-
-          <div class="map-canvas" id="miniMap">
-            <svg viewBox="0 0 700 480" preserveAspectRatio="none" aria-label="Mapa simulado">
-              <rect width="700" height="480" fill="#edece7"/>
-              <g stroke="#d1d0cb" stroke-width="9" fill="none">
-                <path d="M-20 100 C120 80, 180 160, 330 140 S520 50, 730 80"/>
-                <path d="M20 440 C120 330, 190 300, 340 310 S520 380, 720 250"/>
-                <path d="M100 -20 C90 100, 150 160, 130 280 S50 420, 80 510"/>
-                <path d="M420 -20 C400 120, 460 210, 440 520"/>
-              </g>
-              <g stroke="#c6c5c0" stroke-width="3" fill="none">
-                <path d="M0 55 L700 340"/>
-                <path d="M20 230 L650 60"/>
-                <path d="M180 0 L250 480"/>
-                <path d="M540 0 L490 480"/>
-                <path d="M0 380 L700 180"/>
-              </g>
-              <g stroke="#ffffff" stroke-width="2" fill="none">
-                <path d="M0 55 L700 340"/>
-                <path d="M20 230 L650 60"/>
-                <path d="M180 0 L250 480"/>
-                <path d="M540 0 L490 480"/>
-                <path d="M0 380 L700 180"/>
-              </g>
-              <g fill="#73777a" font-size="16" font-family="Inter, sans-serif">
-                <text x="80" y="80">Océano Pacífico</text>
-                <text x="300" y="70">Av. Universidad</text>
-                <text x="480" y="160">C. Progreso</text>
-                <text x="230" y="245">El Rinconcito</text>
-                <text x="230" y="266">Michoacano</text>
-                <text x="480" y="310">C. Libertad</text>
-                <text x="85" y="360">Lomas Lindas</text>
-              </g>
-            </svg>
-            <div id="mapMarker" class="map-marker">!</div>
-            <div class="map-zoom">
-              <button type="button">＋</button>
-              <button type="button">−</button>
-            </div>
-            <div class="map-credit">Mapa de simulación</div>
-          </div>
-
-          <div class="resource-tabs">
-            <button class="resource-tab active" type="button" data-resource="dispatch">🚓 Dispatch</button>
-            <button class="resource-tab" type="button" data-resource="people">♙ People</button>
-            <button class="resource-tab" type="button" data-resource="vehicles">🚗 Vehicles</button>
-          </div>
-
-          <div id="resourceContent" class="resource-content">
-            <div class="unit-row">
-              <label for="unitSelect"><span>*</span> Units</label>
-              <select id="unitSelect">
-                <option value="">Select</option>
-              </select>
-              <button id="dispatchUnitButton" class="dispatch-btn" type="button" title="Despachar unidad">🚙</button>
-              <button id="locateUnitButton" class="locate-btn" type="button" title="Localizar unidad">⌖</button>
-            </div>
-            <div id="unitStatus" class="unit-status">Seleccione una unidad disponible.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="workspace map-only hidden" id="mapView">
-        <div class="panel full-map-panel">
-          <div class="full-map-toolbar">
+    <section class="view active" id="view-dispatch">
+      <div class="dispatch-grid">
+        <section class="panel incidents">
+          <header class="panel-head">
             <div>
-              <h1>Mapa operativo</h1>
-              <p>Incidentes y unidades en tiempo real — modo demostración.</p>
+              <h1>Dispatch</h1>
+              <small>Panel de incidentes</small>
             </div>
-            <div class="map-stats">
-              <span><strong id="activeIncidentCount">0</strong> incidentes</span>
-              <span><strong id="availableUnitCount">0</strong> unidades disponibles</span>
+            <div class="tabs">
+              <button class="tab active" data-status="open">ACTIVOS</button>
+              <button class="tab" data-status="closed">CERRADOS</button>
+            </div>
+            <button class="round" id="createIncidentBtn">＋</button>
+          </header>
+          <div class="filterbar">
+            <input id="incidentSearch" placeholder="Buscar por código, tipo o solicitante">
+            <select id="priorityFilter">
+              <option value="">Todas las prioridades</option>
+              <option value="high">Alta</option>
+              <option value="medium">Media</option>
+              <option value="low">Baja</option>
+            </select>
+          </div>
+          <div class="incident-list" id="incidentList"></div>
+          <footer class="panel-foot"><span id="incidentCount"></span><span>Actualización automática</span></footer>
+        </section>
+
+        <section class="panel details">
+          <div class="section-tabs">
+            <button class="active" data-detail="overview">⌂ Overview</button>
+            <button data-detail="timeline">◴ Cronología</button>
+          </div>
+          <div class="detail-page active" id="detail-overview">
+            <div class="overview-card">
+              <div class="overview-header">
+                <div>
+                  <span class="eyebrow">INCIDENTE</span>
+                  <h2 id="detailCode">—</h2>
+                </div>
+                <div class="detail-buttons">
+                  <button id="closeIncident" title="Cerrar incidente">✓</button>
+                  <button id="exportPdfQuick" title="Exportar PDF">PDF</button>
+                  <button id="exportXlsxQuick" title="Exportar XLSX">XLS</button>
+                </div>
+              </div>
+              <div class="info-grid" id="detailInfo"></div>
+              <label>Descripción
+                <textarea id="detailDescription"></textarea>
+              </label>
+              <label>Notas operativas
+                <textarea id="detailNotes"></textarea>
+              </label>
+              <div class="message-row">
+                <input id="newNote" placeholder="Agregar nota a la cronología">
+                <button id="addNote">➤</button>
+              </div>
             </div>
           </div>
-          <div class="full-map">
-            <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
-              <rect width="1200" height="700" fill="#e8e7e2"/>
-              <g stroke="#cac9c3" stroke-width="14" fill="none">
-                <path d="M0 150 C250 80, 400 220, 620 170 S920 60, 1200 120"/>
-                <path d="M0 600 C200 430, 430 470, 650 520 S930 600, 1200 390"/>
-                <path d="M180 0 C160 240, 250 300, 210 700"/>
-                <path d="M780 0 C730 260, 830 420, 790 700"/>
-              </g>
-              <g stroke="#fff" stroke-width="4" fill="none">
-                <path d="M0 80 L1200 590"/>
-                <path d="M0 420 L1200 110"/>
-                <path d="M340 0 L430 700"/>
-                <path d="M950 0 L880 700"/>
-              </g>
-            </svg>
-            <div id="fullMapMarkers"></div>
+          <div class="detail-page" id="detail-timeline">
+            <div class="timeline" id="timeline"></div>
+          </div>
+        </section>
+
+        <section class="panel map-resources">
+          <div class="map-title">🚓 Despacho y ubicación</div>
+          <div id="dispatchMap" class="map"></div>
+          <div class="resource-tabs">
+            <button class="active" data-resource="units">Unidades</button>
+            <button data-resource="recommend">Recomendación</button>
+            <button data-resource="pois">POI / GIS</button>
+          </div>
+          <div id="resource-units" class="resource-page active">
+            <div class="dispatch-controls">
+              <select id="unitSelect"></select>
+              <button class="primary" id="dispatchUnit">Despachar</button>
+              <button id="locateUnit">Localizar</button>
+            </div>
+            <div class="unit-list" id="unitList"></div>
+          </div>
+          <div id="resource-recommend" class="resource-page">
+            <p class="hint">Unidades disponibles ordenadas por distancia al incidente.</p>
+            <div class="recommend-list" id="recommendList"></div>
+          </div>
+          <div id="resource-pois" class="resource-page">
+            <div class="search-row">
+              <input id="poiSearch" placeholder="Escuela, hospital, estadio, monumento...">
+              <button id="searchPoi">Buscar</button>
+            </div>
+            <div id="poiResults" class="poi-results"></div>
+            <p class="hint">También puede hacer clic en el mapa para fijar la ubicación del incidente.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="view" id="view-dashboard">
+      <div class="page-pad">
+        <div class="page-heading"><div><h1>Dashboard operativo</h1><p>Estado en tiempo real de incidentes y recursos.</p></div></div>
+        <div class="kpis" id="kpis"></div>
+        <div class="dashboard-grid">
+          <div class="panel chart-panel"><h2>Incidentes por estado</h2><div class="bars" id="statusBars"></div></div>
+          <div class="panel chart-panel"><h2>Incidentes por prioridad</h2><div class="bars" id="priorityBars"></div></div>
+          <div class="panel table-panel"><h2>Últimos incidentes</h2><div id="recentTable"></div></div>
+          <div class="panel table-panel"><h2>Disponibilidad de unidades</h2><div id="availabilityTable"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-map">
+      <div class="page-pad map-page">
+        <div class="page-heading">
+          <div><h1>Mapa operativo</h1><p>Incidentes y agentes georreferenciados.</p></div>
+          <div class="map-tools">
+            <label><input type="checkbox" id="showIncidents" checked> Incidentes</label>
+            <label><input type="checkbox" id="showUnits" checked> Unidades</label>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
+        <div id="fullMap" class="full-map"></div>
+      </div>
+    </section>
 
-  <dialog id="incidentDialog">
-    <form id="incidentForm" method="dialog">
-      <div class="dialog-header">
-        <div>
-          <h2>Crear incidente</h2>
-          <p>Agrega una ocurrencia para la demostración.</p>
+    <section class="view" id="view-people">
+      <div class="page-pad">
+        <div class="page-heading"><div><h1>Búsqueda de personas</h1><p>Consulta por DNI o CPF con datos simulados.</p></div></div>
+        <div class="panel people-panel">
+          <div class="search-row">
+            <input id="personSearch" placeholder="Escriba DNI o CPF, por ejemplo 12345678901">
+            <button class="primary" id="searchPerson">Buscar</button>
+          </div>
+          <div id="personResult" class="person-result empty">Ingrese un documento para realizar la consulta.</div>
         </div>
-        <button value="cancel" class="dialog-close" aria-label="Cerrar">×</button>
       </div>
+    </section>
 
-      <div class="form-grid">
-        <label>Solicitante
-          <input name="caller" required placeholder="Nombre completo">
-        </label>
-        <label>Tipo
-          <input name="type" required placeholder="Ej. Accidente vial">
-        </label>
-        <label>Prioridad
-          <select name="priority">
-            <option value="high">Alta</option>
-            <option value="medium">Media</option>
-            <option value="low">Baja</option>
-          </select>
-        </label>
-        <label>Ubicación
-          <input name="location" required placeholder="Calle, colonia o punto de interés">
-        </label>
-        <label class="full">Descripción
-          <textarea name="description" required placeholder="Detalle de la emergencia"></textarea>
-        </label>
+    <section class="view" id="view-reports">
+      <div class="page-pad">
+        <div class="page-heading"><div><h1>Reportes</h1><p>Descarga de incidentes finalizados o del historial completo.</p></div></div>
+        <div class="report-grid">
+          <div class="panel report-card">
+            <h2>Incidente seleccionado</h2>
+            <p>Genera un informe detallado con datos, unidades y cronología.</p>
+            <button class="primary" id="reportSelectedPdf">Descargar PDF</button>
+            <button id="reportSelectedXlsx">Descargar XLSX</button>
+          </div>
+          <div class="panel report-card">
+            <h2>Historial completo</h2>
+            <p>Exporta todos los incidentes registrados en el simulador.</p>
+            <button class="primary" id="reportAllPdf">Descargar PDF</button>
+            <button id="reportAllXlsx">Descargar XLSX</button>
+          </div>
+        </div>
+        <div class="panel compliance">
+          <h2>Cobertura funcional de la demostración</h2>
+          <div id="coverageGrid"></div>
+        </div>
       </div>
+    </section>
+  </main>
+</div>
 
-      <div class="dialog-actions">
-        <button value="cancel" class="secondary-button">Cancelar</button>
-        <button type="submit" class="primary-button">Crear incidente</button>
-      </div>
-    </form>
-  </dialog>
+<dialog id="incidentDialog">
+  <form id="incidentForm">
+    <header><div><h2>Crear ocurrencia</h2><p>Registro manual de un nuevo incidente.</p></div><button type="button" id="closeDialog">×</button></header>
+    <div class="form-grid">
+      <label>Solicitante<input name="caller" required></label>
+      <label>DNI / CPF<input name="document" required></label>
+      <label>Tipo<input name="type" required placeholder="Ej. Accidente vial"></label>
+      <label>Prioridad<select name="priority"><option value="high">Alta</option><option value="medium">Media</option><option value="low">Baja</option></select></label>
+      <label class="wide">Dirección<input name="address" id="addressInput" required placeholder="Escriba dirección o punto de interés"></label>
+      <label class="wide">Descripción<textarea name="description" required></textarea></label>
+      <label>Latitud<input name="lat" id="latInput" type="number" step="any" required></label>
+      <label>Longitud<input name="lng" id="lngInput" type="number" step="any" required></label>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" id="geocodeAddress">Geolocalizar dirección</button>
+      <span></span>
+      <button type="button" id="cancelDialog">Cancelar</button>
+      <button class="primary" type="submit">Crear incidente</button>
+    </div>
+  </form>
+</dialog>
 
-  <div id="toast" class="toast" role="status"></div>
+<div id="toast" class="toast"></div>
 
-  <script src="./app.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>

@@ -1,68 +1,29 @@
 # CAD Dispatch Simulator
 
-Prototipo frontend para simular un módulo de **Computer-Aided Dispatch (CAD)** con un look & feel oscuro similar a una consola de despacho de emergencias.
+Simulador web de CAD con interfaz oscura, datos persistentes en el navegador y cobertura de los requerimientos 17 al 30.
 
-## Incluye
+## Funciones incluidas
 
-- Lista de incidentes abiertos y cerrados.
-- Prioridades alta, media y baja.
-- Panel de detalle, notas y cronología.
-- Mapa simulado con ubicación del incidente.
-- Unidades disponibles y ocupadas.
-- Asignación de unidades a incidentes.
-- Vista de mapa operativo.
-- Alta de nuevos incidentes.
-- Diseño responsive.
-- Tema oscuro y claro.
+- Interfaz web de atención y despacho.
+- Dashboard de incidentes activos y completados.
+- Exportación PDF y XLSX.
+- Mapa OpenStreetMap con incidentes y unidades.
+- Creación y gestión de ocurrencias.
+- Geocodificación de dirección.
+- Búsqueda parcial de hospitales, escuelas, estadios y monumentos.
+- Consulta simulada de personas por DNI/CPF.
+- Ubicación del incidente mediante clic directo en el mapa.
+- Detalle del incidente con código, tipo, prioridad, fecha, solicitante y mapa.
+- Despacho de agentes.
+- Unidades georreferenciadas y disponibilidad.
+- Recomendación por distancia.
+- Cronología completa.
+- Persistencia mediante `localStorage`.
 
-## Ejecutar localmente
+## Publicación
 
-No requiere instalación ni compilación.
+Sube `index.html`, `styles.css`, `app.js`, `README.md`, `LICENSE` y `.gitignore` a la raíz del repositorio. GitHub Pages debe usar la rama `main` y la carpeta `/(root)`.
 
-```bash
-python -m http.server 8080
-```
+## Nota
 
-Después abre:
-
-```text
-http://localhost:8080
-```
-
-También puedes abrir `index.html` directamente, aunque se recomienda un servidor local.
-
-## Publicar en GitHub Pages
-
-1. Crea un repositorio nuevo en GitHub.
-2. Sube todos los archivos de este proyecto a la rama `main`.
-3. En GitHub ve a **Settings → Pages**.
-4. En **Build and deployment**, selecciona **Deploy from a branch**.
-5. Selecciona la rama `main` y la carpeta `/root`.
-6. Guarda los cambios.
-
-## Crear el repositorio desde terminal
-
-```bash
-git init
-git add .
-git commit -m "Initial CAD simulator"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/cad-dispatch-simulator.git
-git push -u origin main
-```
-
-## Estructura
-
-```text
-cad-dispatch-simulator/
-├── index.html
-├── styles.css
-├── app.js
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
-## Aviso
-
-Este proyecto es una simulación visual para demostraciones y prototipos. No procesa emergencias reales, no incluye autenticación, persistencia, GPS real, telefonía, radio, GIS productivo ni integración con agencias.
+Es una simulación para demostraciones. Los agentes, personas e incidentes usan datos ficticios. La geocodificación externa depende de disponibilidad de Nominatim/OpenStreetMap.

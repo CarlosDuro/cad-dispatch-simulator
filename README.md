@@ -138,3 +138,18 @@ Se eliminaron los anchos mínimos rígidos que desplazaban la tercera columna fu
 - En laptops y contenedores de hasta 1500 px, el mapa y recursos pasan automáticamente debajo de incidentes y detalle.
 - En pantallas pequeñas, todas las secciones se apilan.
 - El mapa usa siempre el 100% del ancho disponible.
+
+
+## Versión v14 — diseño de referencia
+
+La pantalla Dispatch fue rediseñada para aproximarse a la referencia proporcionada:
+
+- Barra lateral compacta y jerarquía Calltaker Dispatch.
+- Barra superior con controles e indicador operativo.
+- Pestaña superior de Dispatch.
+- Tres columnas de altura completa.
+- Lista de incidentes compacta.
+- Panel central oscuro con Overview y Cronología.
+- Mapa y controles de despacho en la tercera columna.
+- Controles redondos e interfaz de alta densidad.
+- Scroll independiente en cada columna.

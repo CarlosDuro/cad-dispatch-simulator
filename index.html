@@ -9,29 +9,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="./styles-v12.css?v=12.0.0">
+  <link rel="stylesheet" href="./styles-v14.css?v=14.0.0">
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><span class="logo">N11</span><strong>N11 Dispatch</strong></div>
-    <button class="nav active" data-view="dispatch">🚓 <span>Dispatch</span></button>
-    <button class="nav" data-view="dashboard">▦ <span>Dashboard</span></button>
-    <button class="nav" data-view="map">🗺️ <span>Mapa</span></button>
-    <button class="nav" data-view="people">👤 <span>Personas</span></button>
-    <button class="nav" data-view="reports">📄 <span>Reportes</span></button>
+    <div class="brand">
+      <span class="brand-mark"><i></i><b>N11</b></span>
+    </div>
+
+    <div class="sidebar-group-title">
+      <span>🚓 Calltaker Dispatch</span>
+      <span>⌃</span>
+    </div>
+
+    <button class="nav active" data-view="dispatch"><span class="nav-icon">🚓</span><span>Dispatch</span></button>
+    <button class="nav" data-view="map"><span class="nav-icon">🗺</span><span>Map</span></button>
+
+    <div class="sidebar-divider"></div>
+    <button class="nav secondary-nav" data-view="dashboard"><span class="nav-icon">▦</span><span>Dashboard</span></button>
+    <button class="nav secondary-nav" data-view="people"><span class="nav-icon">👤</span><span>Personas</span></button>
+    <button class="nav secondary-nav" data-view="reports"><span class="nav-icon">📄</span><span>Reportes</span></button>
+
     <div class="side-spacer"></div>
-    <button class="nav" id="resetDemo">↻ <span>Restablecer demo</span></button>
+    <button class="nav reset-nav" id="resetDemo"><span>«</span><span>Restablecer demo</span></button>
   </aside>
 
   <main class="main">
     <header class="topbar">
-      <div class="crumb">🚓 Calltaker Dispatch <span>›</span> <strong id="currentTitle">Dispatch</strong></div>
+      <div class="top-left">
+        <button class="top-icon" aria-label="Menú">☰</button>
+        <button class="top-icon" aria-label="Actualizar">↻</button>
+        <div class="crumb">🚓 Calltaker Dispatch <span>›</span> <strong id="currentTitle">Dispatch</strong></div>
+      </div>
       <div class="top-actions">
-        <span class="live"><i></i> Operación activa</span>
-        <button class="icon" id="themeToggle">☀</button>
+        <button class="top-icon">⚙</button>
+        <button class="top-icon" id="themeToggle">☀</button>
+        <button class="top-icon">A⌁</button>
+        <button class="top-icon">◎</button>
+        <span class="live"><i></i></span>
       </div>
     </header>
+    <div class="workspace-tabs">
+      <button class="workspace-tab active">🚓 Dispatch</button>
+      <div class="workspace-fill"></div>
+      <button class="workspace-chevron">⌄</button>
+      <button class="workspace-focus">⛶</button>
+    </div>
 
     <section class="view active" id="view-dispatch">
       <div class="dispatch-grid">
@@ -42,15 +66,15 @@
               <small>Panel de incidentes</small>
             </div>
             <div class="tabs">
-              <button class="tab active" data-status="open">ACTIVOS</button>
-              <button class="tab" data-status="closed">CERRADOS</button>
+              <button class="tab active" data-status="open">DISPATCHED</button>
+              <button class="tab" data-status="closed">CLOSED</button>
             </div>
             <button class="round" id="createIncidentBtn">＋</button>
           </header>
           <div class="filterbar">
-            <input id="incidentSearch" placeholder="Buscar por código, tipo o solicitante">
+            <input id="incidentSearch" placeholder="Emergency">
             <select id="priorityFilter">
-              <option value="">Todas las prioridades</option>
+              <option value="">Priority</option>
               <option value="high">Alta</option>
               <option value="medium">Media</option>
               <option value="low">Baja</option>
@@ -98,12 +122,12 @@
         </section>
 
         <section class="panel map-resources">
-          <div class="map-title">🚓 Despacho y ubicación</div>
+          <div class="map-title">🚓 Dispatch</div>
           <div id="dispatchMap" class="map"></div>
           <div class="resource-tabs">
-            <button class="active" data-resource="units">Unidades</button>
-            <button data-resource="recommend">Recomendación</button>
-            <button data-resource="pois">POI / GIS</button>
+            <button class="active" data-resource="units">Dispatch</button>
+            <button data-resource="recommend">People</button>
+            <button data-resource="pois">Vehicles</button>
           </div>
           <div id="resource-units" class="resource-page active">
 <div class="unit-state-help">Estados: Disponible → Despachada → En ruta → En escena → Disponible</div>
@@ -164,7 +188,7 @@
 
     <section class="view" id="view-people">
       <div class="page-pad">
-        <div class="page-heading"><div><h1>Búsqueda de personas <span class="build-badge">v12 · ajuste 100%</span></h1><p>Consulta por DNI o CPF con datos simulados.</p></div></div>
+        <div class="page-heading"><div><h1>Búsqueda de personas <span class="build-badge">v14 · diseño de referencia</span></h1><p>Consulta por DNI o CPF con datos simulados.</p></div></div>
         <div class="panel people-panel">
           <div class="search-row">
             <input id="personSearch" placeholder="Buscar por nombre, DNI o CPF: 1, 12, 123, Daniel...">
@@ -249,6 +273,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="./app-v12.js?v=12.0.0"></script>
+<script src="./app-v14.js?v=14.0.0"></script>
 </body>
 </html>

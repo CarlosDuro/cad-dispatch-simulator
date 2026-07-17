@@ -118,3 +118,23 @@ La aplicación ya no depende de un scroll interno en `#view-dispatch`. Ahora uti
 - Scroll horizontal cuando las tres columnas superan el ancho disponible.
 - Sidebar y barra superior permanecen visibles mediante `position: sticky`.
 - Se eliminaron los bloqueos efectivos producidos por `overflow: hidden` y alturas fijas.
+
+
+## Versión v11 — controles alineados
+
+Se corrigió la distribución de los controles de unidades:
+
+- Selectores con ancho flexible.
+- Botones con altura uniforme.
+- “Despachar”, “Localizar”, “Avanzar estado” y “Liberar” ya no se cortan.
+- En espacios reducidos los selectores pasan arriba y los botones quedan en una fila de dos columnas.
+
+
+## Versión v12 — ajuste a zoom 100%
+
+Se eliminaron los anchos mínimos rígidos que desplazaban la tercera columna fuera de pantalla.
+
+- En pantallas amplias se conservan tres columnas.
+- En laptops y contenedores de hasta 1500 px, el mapa y recursos pasan automáticamente debajo de incidentes y detalle.
+- En pantallas pequeñas, todas las secciones se apilan.
+- El mapa usa siempre el 100% del ancho disponible.

@@ -153,3 +153,12 @@ La pantalla Dispatch fue rediseñada para aproximarse a la referencia proporcion
 - Mapa y controles de despacho en la tercera columna.
 - Controles redondos e interfaz de alta densidad.
 - Scroll independiente en cada columna.
+
+
+## Versión v15
+
+- Logo N11 sustituido por una marca vectorial más cercana a la referencia.
+- Eliminada la leyenda “v14 · diseño de referencia” de Personas.
+- Las unidades disponibles se desplazan continuamente por el mapa.
+- Las unidades en ruta avanzan hacia el incidente seleccionado y cambian automáticamente a “En escena” al llegar.
+- Posición, rumbo y velocidad se actualizan cada dos segundos.

@@ -58,3 +58,8 @@ La sección Personas busca desde el primer carácter y acepta:
 
 ## Registro ampliado
 Incluye 80 personas ficticias, ejemplos rápidos y tarjetas de identidad simuladas con fotografía ilustrada localmente. Todos los datos son ficticios.
+
+
+## Corrección de datos anteriores
+
+Esta versión usa una nueva clave de almacenamiento local para evitar que una versión anterior con solo tres personas sustituya el registro ampliado. Al abrir Personas se ejecuta automáticamente una búsqueda de ejemplo y se muestra una tarjeta con ilustración. El botón “Restablecer datos demo” permite limpiar la información guardada en el navegador.

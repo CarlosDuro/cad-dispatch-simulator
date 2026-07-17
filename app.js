@@ -1,4 +1,4 @@
-const STORAGE_KEY="n11-dispatch-v2";
+const STORAGE_KEY="n11-dispatch-v4-people";
 const baseLat=19.4326,baseLng=-99.1332;
 const seed={
  incidents:[
@@ -56,7 +56,13 @@ function renderMaps(){
  const i=selected();
  const im=L.marker([i.lat,i.lng],{icon:markerIcon("#ff5e50","!")}).addTo(dispatchMap).bindPopup(`<b>${i.id}</b><br>${i.type}<br>${i.address}`);dispatchLayers.push(im);dispatchMap.setView([i.lat,i.lng],13);
  data.units.forEach(u=>{const m=L.marker([u.lat,u.lng],{icon:markerIcon(u.status==="available"?"#2fc98b":"#138df4","🚓")}).addTo(dispatchMap).bindPopup(`<b>${u.name}</b><br>${u.status==="available"?"Disponible":"Ocupada"}`);dispatchLayers.push(m)});
- if(document.addEventListener("click",e=>{const b=e.target.closest("[data-person-example]");if(!b)return;$("#personSearch").value=b.dataset.personExample;$("#searchPerson").click()});
+ if(
+$("#resetDemoData").onclick=()=>{
+ localStorage.removeItem(STORAGE_KEY);
+ location.reload();
+};
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-person-example]");if(!b)return;$("#personSearch").value=b.dataset.personExample;$("#searchPerson").click()});
 $("#showIncidents")?.checked!==false)data.incidents.filter(x=>x.status==="open").forEach(x=>{const m=L.marker([x.lat,x.lng],{icon:markerIcon("#ff5e50","!")}).addTo(fullMap).bindPopup(`<b>${x.id}</b><br>${x.type}`);fullLayers.push(m)});
  if($("#showUnits")?.checked!==false)data.units.forEach(u=>{const m=L.marker([u.lat,u.lng],{icon:markerIcon(u.status==="available"?"#2fc98b":"#138df4","🚓")}).addTo(fullMap).bindPopup(`<b>${u.name}</b><br>${u.status}`);fullLayers.push(m)})
 }
@@ -227,4 +233,17 @@ $("#exportPdfQuick").onclick=$("#reportSelectedPdf").onclick=()=>exportPdf(false
 $("#themeToggle").onclick=()=>document.body.classList.toggle("light");
 $("#resetDemo").onclick=()=>{if(confirm("¿Restablecer todos los datos de demostración?")){data=structuredClone(seed);save();selectedId=data.incidents[0].id;renderAll();toast("Demo restablecida")}};
 setInterval(()=>{data.units.forEach(u=>{if(u.operationalState==="disponible"||u.operationalState==="en_ruta"){u.lat+=(Math.random()-.5)*.001;u.lng+=(Math.random()-.5)*.001;u.heading=(u.heading+Math.round((Math.random()-.5)*30)+360)%360}});save();renderMaps();renderResources()},8000);
-window.addEventListener("DOMContentLoaded",()=>{ensureSchema();save();initMaps();renderAll()});
+window.addEventListener("DOMContentLoaded",()=>{
+ ensureSchema();save();initMaps();renderAll();
+ const peopleNav=document.querySelector('[data-view="people"]');
+ if(peopleNav){
+  peopleNav.addEventListener("click",()=>{
+   setTimeout(()=>{
+    if(!$("#personSearch").value.trim()){
+     $("#personSearch").value="Daniel";
+     $("#searchPerson").click();
+    }
+   },100);
+  });
+ }
+});

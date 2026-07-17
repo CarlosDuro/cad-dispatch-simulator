@@ -63,3 +63,8 @@ Incluye 80 personas ficticias, ejemplos rápidos y tarjetas de identidad simulad
 ## Corrección de datos anteriores
 
 Esta versión usa una nueva clave de almacenamiento local para evitar que una versión anterior con solo tres personas sustituya el registro ampliado. Al abrir Personas se ejecuta automáticamente una búsqueda de ejemplo y se muestra una tarjeta con ilustración. El botón “Restablecer datos demo” permite limpiar la información guardada en el navegador.
+
+
+## Versión v5
+
+Los archivos JavaScript y CSS se renombraron a `app-v5.js` y `styles-v5.css` para evitar que GitHub Pages o el navegador reutilicen versiones anteriores almacenadas en caché. En la pantalla Personas debe aparecer la insignia “v5 · DNI ilustrado”.

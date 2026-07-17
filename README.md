@@ -83,3 +83,16 @@ El paquete contiene únicamente los archivos de la versión vigente:
 - `styles-v7.css`
 
 `index.html` apunta expresamente a esos archivos. La sintaxis de `app-v7.js` fue validada con Node.js. La insignia visible en Personas debe indicar “v7 · navegación corregida”.
+
+
+## Versión v8 responsive
+
+Se ajustó el diseño para funcionar dentro de contenedores embebidos como SBO/Omniview:
+
+- Scroll independiente en incidentes, detalle y recursos.
+- Reacomodo de tres a dos columnas en anchos medianos.
+- Recursos pasan a una fila completa cuando el ancho es limitado.
+- En tablet/móvil se apilan las secciones.
+- Barra lateral compacta.
+- Mapa con altura adaptable.
+- Tablas y tarjetas con desplazamiento horizontal cuando es necesario.

@@ -54,3 +54,7 @@ La sección Personas busca desde el primer carácter y acepta:
 - Coincidencias dentro del documento, no únicamente al inicio.
 - Resultados múltiples ordenados por relevancia.
 - Búsqueda automática mientras se escribe.
+
+
+## Registro ampliado
+Incluye 80 personas ficticias, ejemplos rápidos y tarjetas de identidad simuladas con fotografía ilustrada localmente. Todos los datos son ficticios.

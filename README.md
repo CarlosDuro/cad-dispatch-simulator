@@ -1,6 +1,6 @@
-# CAD Dispatch Simulator
+# N11 Dispatch
 
-Simulador web de CAD con interfaz oscura, datos persistentes en el navegador y cobertura de los requerimientos 17 al 30.
+Aplicación web de despacho con interfaz oscura, datos persistentes en el navegador y cobertura de los requerimientos 17 al 30.
 
 ## Funciones incluidas
 

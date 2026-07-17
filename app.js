@@ -1,4 +1,4 @@
-const STORAGE_KEY="cad-simulator-v2";
+const STORAGE_KEY="n11-dispatch-v2";
 const baseLat=19.4326,baseLng=-99.1332;
 const seed={
  incidents:[
@@ -103,7 +103,7 @@ function renderCoverage(){
 function renderAll(){renderIncidents();renderDetails();renderResources();renderDashboard();renderCoverage();renderMaps()}
 function exportPdf(all=false){
  const arr=all?data.incidents:[selected()];const {jsPDF}=window.jspdf;const doc=new jsPDF();let y=15;
- doc.setFontSize(16);doc.text(all?"Historial de incidentes CAD":"Informe de incidente CAD",14,y);y+=10;
+ doc.setFontSize(16);doc.text(all?"Historial de incidentes":"Informe de incidente",14,y);y+=10;
  arr.forEach((i,idx)=>{if(y>260){doc.addPage();y=15}doc.setFontSize(11);doc.text(`${i.id} - ${i.type}`,14,y);y+=6;doc.setFontSize(9);
  const lines=[`Estado: ${i.status}`,`Prioridad: ${priorityLabel(i.priority)}`,`Solicitante: ${i.caller} (${i.document})`,`Fecha: ${fmt(i.createdAt)}`,`Ubicación: ${i.address}`,`Unidades: ${i.assigned.join(", ")||"Sin asignar"}`,`Descripción: ${i.description}`];
  lines.forEach(t=>{const s=doc.splitTextToSize(t,180);doc.text(s,14,y);y+=s.length*5});y+=5;if(!all){doc.text("Cronología:",14,y);y+=5;i.timeline.forEach(t=>{doc.text(`- ${fmt(t[1])}: ${t[0]}`,16,y);y+=5})}y+=6});

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Simulador web de CAD y despacho para demostraciones." />
-  <title>CAD Dispatch Simulator</title>
+  <meta name="description" content="Sistema web de CAD y despacho para demostraciones." />
+  <title>N11 Dispatch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><span class="logo">N11</span><strong>CAD Simulator</strong></div>
+    <div class="brand"><span class="logo">N11</span><strong>N11 Dispatch</strong></div>
     <button class="nav active" data-view="dispatch">🚓 <span>Dispatch</span></button>
     <button class="nav" data-view="dashboard">▦ <span>Dashboard</span></button>
     <button class="nav" data-view="map">🗺️ <span>Mapa</span></button>
@@ -28,7 +28,7 @@
     <header class="topbar">
       <div class="crumb">🚓 Calltaker Dispatch <span>›</span> <strong id="currentTitle">Dispatch</strong></div>
       <div class="top-actions">
-        <span class="live"><i></i> Simulación activa</span>
+        <span class="live"><i></i> Operación activa</span>
         <button class="icon" id="themeToggle">☀</button>
       </div>
     </header>
@@ -179,7 +179,7 @@
           </div>
           <div class="panel report-card">
             <h2>Historial completo</h2>
-            <p>Exporta todos los incidentes registrados en el simulador.</p>
+            <p>Exporta todos los incidentes registrados en el sistema.</p>
             <button class="primary" id="reportAllPdf">Descargar PDF</button>
             <button id="reportAllXlsx">Descargar XLSX</button>
           </div>

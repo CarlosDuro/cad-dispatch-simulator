@@ -171,3 +171,16 @@ El logo vectorial fue sustituido por el logo exacto proporcionado en la captura 
 
 ## Versión v17 — N11 Light Suite
 Tema claro completo inspirado en las pantallas Calltaker, Dispatch Console y Map proporcionadas. Se conservan todas las funciones existentes.
+
+
+## Versión v18 — pestañas funcionales
+
+- Se eliminó el logo de la barra lateral.
+- Las pestañas superiores ahora cambian de pantalla:
+  - Calltaker → Dashboard operativo.
+  - Calltaker Console → Personas.
+  - Dispatch Console → Dispatch.
+  - Map → Mapa.
+- La pestaña activa y el menú lateral permanecen sincronizados.
+- La URL usa `#dispatch`, `#dashboard`, `#people` o `#map`.
+- El botón de pantalla completa es funcional.

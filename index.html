@@ -9,19 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="./styles-v17.css?v=17.0.0">
+  <link rel="stylesheet" href="./styles-v18.css?v=18.0.0">
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-mark">
-  <img class="n11-logo" src="./n11-logo.png" alt="N11">
-  <b>N11</b>
-</span>
-    </div>
-
-    <div class="sidebar-group-title">
+<div class="sidebar-group-title">
       <span>🚓 Calltaker Dispatch</span>
       <span>⌃</span>
     </div>
@@ -54,9 +47,15 @@
       </div>
     </header>
     <div class="workspace-tabs">
-      <button class="workspace-tab">🎧 Calltaker</button><button class="workspace-tab">📞 Calltaker Console</button><button class="workspace-tab active">🚓 Dispatch Console</button><button class="workspace-tab">📍 Map</button>
+      <button class="workspace-tab" data-view="dashboard" data-title="Calltaker">🎧 Calltaker</button>
+      <button class="workspace-tab" data-view="people" data-title="Calltaker Console">📞 Calltaker Console</button>
+      <button class="workspace-tab active" data-view="dispatch" data-title="Dispatch Console">🚓 Dispatch Console</button>
+      <button class="workspace-tab" data-view="map" data-title="Map">📍 Map</button>
       <div class="workspace-fill"></div>
-      <button class="workspace-chevron">⌄</button>
+      <button class="workspace-chevron" aria-label="Más opciones">⌄</button>
+      <button class="workspace-focus" aria-label="Pantalla completa">⛶</button>
+    </div>
+<button class="workspace-chevron">⌄</button>
       <button class="workspace-focus">⛶</button>
     </div>
 
@@ -276,6 +275,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="./app-v17.js?v=17.0.0"></script>
+<script src="./app-v18.js?v=18.0.0"></script>
 </body>
 </html>

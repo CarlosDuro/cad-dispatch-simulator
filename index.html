@@ -1,277 +1,228 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Sistema web de CAD y despacho para demostraciones." />
-  <title>N11 Dispatch</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="N11 public safety operations suite demo">
+  <title>N11 Operations Suite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="./styles-v19.css?v=19.0.0">
+  <link rel="stylesheet" href="./styles-v20.css?v=20.0.0">
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-<div class="sidebar-group-title">
-      <span>🚓 Calltaker Dispatch</span>
-      <span>⌃</span>
-    </div>
-
-    <button class="nav active" data-view="dispatch"><span class="nav-icon">🚓</span><span>Dispatch</span></button>
-    <button class="nav" data-view="map"><span class="nav-icon">🗺</span><span>Map</span></button>
-
-    <div class="sidebar-divider"></div>
-    <button class="nav secondary-nav" data-view="dashboard"><span class="nav-icon">▦</span><span>Dashboard</span></button>
-    <button class="nav secondary-nav" data-view="people"><span class="nav-icon">👤</span><span>Personas</span></button>
-    <button class="nav secondary-nav" data-view="reports"><span class="nav-icon">📄</span><span>Reportes</span></button>
-
-    <div class="side-spacer"></div>
-    <button class="nav reset-nav" id="resetDemo"><span>«</span><span>Restablecer demo</span></button>
-  </aside>
-
-  <main class="main">
-    <header class="topbar">
-      <div class="top-left">
-        <button class="top-icon" aria-label="Menú">☰</button>
-        <button class="top-icon" aria-label="Actualizar">↻</button>
-        <div class="crumb">🚓 Calltaker Dispatch <span>›</span> <strong id="currentTitle">Dispatch</strong></div>
-      </div>
-      <div class="top-actions">
-        <button class="top-icon">⚙</button>
-        <button class="top-icon" id="themeToggle">☀</button>
-        <button class="top-icon">A⌁</button>
-        <button class="top-icon">◎</button>
-        <span class="live"><i></i></span>
+  <div class="suite-shell">
+    <header class="suite-header">
+      <nav class="suite-tabs" aria-label="Módulos principales">
+        <button class="suite-tab" data-screen="calltaker">🎧 Calltaker</button>
+        <button class="suite-tab active" data-screen="calltaker-console">📞 Calltaker Console</button>
+        <button class="suite-tab" data-screen="dispatch-console">🚓 Dispatch Console</button>
+        <button class="suite-tab" data-screen="map">📍 Map</button>
+      </nav>
+      <div class="suite-actions">
+        <button class="icon-button" id="openUtilities" title="Utilidades">▦</button>
+        <button class="icon-button" id="refreshAll" title="Actualizar">↻</button>
+        <button class="icon-button" id="fullScreen" title="Pantalla completa">⛶</button>
       </div>
     </header>
-    <div class="workspace-tabs">
-      <button class="workspace-tab" data-view="dashboard" data-title="Calltaker">🎧 Calltaker</button>
-      <button class="workspace-tab" data-view="people" data-title="Calltaker Console">📞 Calltaker Console</button>
-      <button class="workspace-tab active" data-view="dispatch" data-title="Dispatch Console">🚓 Dispatch Console</button>
-      <button class="workspace-tab" data-view="map" data-title="Map">📍 Map</button>
-      <div class="workspace-fill"></div>
-      <button class="workspace-chevron" aria-label="Más opciones">⌄</button>
-      <button class="workspace-focus" aria-label="Pantalla completa">⛶</button>
-    </div>
 
-    <section class="view active" id="view-dispatch">
-      <div class="dispatch-grid">
-        <section class="panel incidents">
-          <header class="panel-head">
-            <div>
-              <h1>Dispatch</h1>
-              <small>Panel de incidentes</small>
+    <main class="suite-main">
+      <section class="suite-screen" id="screen-calltaker">
+        <div class="calltaker-overview-layout">
+          <section class="surface queue-surface">
+            <div class="surface-toolbar">
+              <div class="search-box">⌕ <input id="queueSearch" placeholder="FOLIO, PHONE OR NAME..."></div>
+              <button class="plain-icon">↻</button>
+              <button class="plain-icon">▽</button>
             </div>
-            <div class="tabs">
-              <button class="tab active" data-status="open">DISPATCHED</button>
-              <button class="tab" data-status="closed">CLOSED</button>
+            <div class="pill-tabs compact">
+              <button class="active">Todos</button><button>WAITING</button><button>LIVE</button><button>HISTORY</button>
             </div>
-            <button class="round" id="createIncidentBtn">＋</button>
-          </header>
-          <div class="filterbar">
-            <input id="incidentSearch" placeholder="Emergency">
-            <select id="priorityFilter">
-              <option value="">Priority</option>
-              <option value="high">Alta</option>
-              <option value="medium">Media</option>
-              <option value="low">Baja</option>
-            </select>
-          </div>
-          <div class="incident-list" id="incidentList"></div>
-          <footer class="panel-foot"><span id="incidentCount"></span><span>Actualización automática</span></footer>
-        </section>
+            <div id="callQueueList" class="call-list"></div>
+          </section>
 
-        <section class="panel details">
-          <div class="section-tabs">
-            <button class="active" data-detail="overview">⌂ Overview</button>
-            <button data-detail="timeline">◴ Cronología</button>
-          </div>
-          <div class="detail-page active" id="detail-overview">
-            <div class="overview-card">
-              <div class="overview-header">
-                <div>
-                  <span class="eyebrow">INCIDENTE</span>
-                  <h2 id="detailCode">—</h2>
-                </div>
-                <div class="detail-buttons">
-                  <button id="changeStatus" title="Cambiar estado operativo">Estado</button>
-<button id="closeIncident" title="Finalizar incidente">✓ Finalizar</button>
-                  <button id="exportPdfQuick" title="Exportar PDF">PDF</button>
-                  <button id="exportXlsxQuick" title="Exportar XLSX">XLS</button>
-                </div>
+          <section class="surface call-overview-main">
+            <div class="surface-heading">
+              <div><span class="live-dot"></span><strong>Calltaker overview</strong></div>
+              <span id="overviewClock" class="muted"></span>
+            </div>
+            <div class="overview-kpis" id="calltakerKpis"></div>
+            <div class="overview-columns">
+              <div class="overview-card">
+                <h3>Active call</h3>
+                <div id="overviewActiveCall" class="empty-state">No active call</div>
               </div>
-              <div class="info-grid" id="detailInfo"></div>
-              <label>Descripción
-                <textarea id="detailDescription"></textarea>
-              </label>
-              <label>Notas operativas
-                <textarea id="detailNotes"></textarea>
-              </label>
-              <div class="message-row">
-                <input id="newNote" placeholder="Agregar nota a la cronología">
-                <button id="addNote">➤</button>
+              <div class="overview-card">
+                <h3>Recent activity</h3>
+                <div id="recentCallActivity"></div>
               </div>
             </div>
-          </div>
-          <div class="detail-page" id="detail-timeline">
-            <div class="timeline" id="timeline"></div>
-          </div>
-        </section>
+          </section>
 
-        <section class="panel map-resources">
-          <div class="map-title">🚓 Dispatch</div>
-          <div id="dispatchMap" class="map"></div>
-          <div class="resource-tabs">
-            <button class="active" data-resource="units">Dispatch</button>
-            <button data-resource="recommend">People</button>
-            <button data-resource="pois">Vehicles</button>
-          </div>
-          <div id="resource-units" class="resource-page active">
-<div class="unit-state-help">Estados: Disponible → Despachada → En ruta → En escena → Disponible</div>
-            <div class="dispatch-controls">
-              <select id="unitSelect"></select>
-              <button class="primary" id="dispatchUnit">Despachar</button>
-              <button id="locateUnit">Localizar</button>
+          <section class="surface overview-side">
+            <div class="surface-heading"><strong>Shift status</strong><span class="status-badge success">ONLINE</span></div>
+            <div id="shiftMetrics" class="metric-stack"></div>
+            <button class="primary wide" id="answerNextCall">Answer next call</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="suite-screen active" id="screen-calltaker-console">
+        <div class="calltaker-console-layout">
+          <section class="surface live-call-panel">
+            <div class="pill-tabs"><button class="active" data-live-tab="live"><span class="red-dot"></span> Live</button><button data-live-tab="history">◷ History</button></div>
+            <div id="liveCallContent" class="live-call-content"></div>
+            <div class="call-counters"><span>Waiting Calls: <b id="waitingCount">0</b></span><span>☎ Abandoned: <b>0</b></span></div>
+            <button class="floating-call-button" id="toggleCallBtn" title="Iniciar/finalizar llamada">☎</button>
+          </section>
+
+          <section class="surface address-panel">
+            <div class="segmented full"><button class="active" data-address-tab="address">Address</button><button data-address-tab="poi">Registered POI</button></div>
+            <div class="address-search">⌕ <input id="callAddressSearch" placeholder="Search address or POI"></div>
+            <div id="calltakerMap" class="console-map"></div>
+            <div class="address-fields">
+              <input id="addrStreet" placeholder="STREET">
+              <input id="addrNumber" placeholder="NUMBER">
+              <input id="addrNeighborhood" placeholder="NEIGHBORHOOD">
+              <input id="addrCity" placeholder="CITY">
+              <input id="addrState" placeholder="STATE">
+              <input id="addrPostal" placeholder="POSTAL CODE">
+              <input id="addrCountry" placeholder="COUNTRY">
+              <input id="addrReference" class="span-2" placeholder="REFERENCE">
             </div>
-<div class="dispatch-controls">
-<select id="assignedUnitSelect"></select>
-<button id="advanceUnitState">Avanzar estado</button>
-<button id="releaseUnit">Liberar</button>
-</div>
-            <div class="unit-list" id="unitList"></div>
-          </div>
-          <div id="resource-recommend" class="resource-page">
-            <p class="hint">Unidades disponibles ordenadas por distancia al incidente.</p>
-            <div class="recommend-list" id="recommendList"></div>
-          </div>
-          <div id="resource-pois" class="resource-page">
-            <div class="search-row">
-<input id="poiSearch" placeholder="Escriba nombre parcial: hospital, escuela, estadio...">
-<button id="searchPoi">Buscar</button>
-</div>
-<label class="external-check"><input type="checkbox" id="externalPoi" checked> Buscar también en OpenStreetMap</label>
-            <div id="poiResults" class="poi-results"></div>
-            <p class="hint">También puede hacer clic en el mapa para fijar la ubicación del incidente.</p>
-          </div>
-        </section>
-      </div>
-    </section>
+          </section>
 
-    <section class="view" id="view-dashboard">
-      <div class="page-pad">
-        <div class="page-heading"><div><h1>Dashboard operativo</h1><p>Estado en tiempo real de incidentes y recursos.</p></div></div>
-        <div class="kpis" id="kpis"></div>
-        <div class="dashboard-grid">
-          <div class="panel chart-panel"><h2>Incidentes por estado</h2><div class="bars" id="statusBars"></div></div>
-          <div class="panel chart-panel"><h2>Incidentes por prioridad</h2><div class="bars" id="priorityBars"></div></div>
-          <div class="panel table-panel"><h2>Últimos incidentes</h2><div id="recentTable"></div></div>
-          <div class="panel table-panel"><h2>Disponibilidad de unidades</h2><div id="availabilityTable"></div></div>
+          <section class="surface conversation-panel">
+            <div class="conversation-heading"><span><span class="live-dot"></span> EN VIVO</span><button id="clearConversation" class="link-button">Clear</button></div>
+            <div class="pill-tabs centered"><button class="active" data-conversation="all">All</button><button data-conversation="transcription">Transcription</button><button data-conversation="media">Media</button><button data-conversation="chat">Chat</button></div>
+            <div class="translation-row">☆ es &nbsp;⇆&nbsp; en</div>
+            <div id="conversationFeed" class="conversation-feed"></div>
+          </section>
+
+          <section class="surface readiness-panel">
+            <div class="readiness-title"><strong>Incident Readiness</strong><button id="clearReadiness" class="link-button">⌫ Clear</button></div>
+            <div class="readiness-steps"><span class="active">Location</span><span>Caller Details</span><span>Incident Type</span></div>
+            <div class="progress-row"><button class="create-incident" id="createIncidentFromCall">Create Incident</button><strong id="readinessPercent">0%</strong></div>
+            <div class="pill-tabs centered small"><button class="active" data-ready-tab="details">Details</button><button data-ready-tab="notes">Notes</button><button data-ready-tab="involved">Involved</button></div>
+            <div class="ready-tab active" id="ready-details">
+              <label>Phone Number<input id="readyPhone"></label>
+              <div class="two-col"><label>Name<input id="readyName"></label><label>Last Name<input id="readyLastName"></label></div>
+              <div class="two-col"><label>Document Number<input id="readyDocument"></label><label>Document Type<select id="readyDocumentType"><option value="">Select</option><option>DNI</option><option>CPF</option><option>CURP</option></select></label></div>
+              <div id="personMatches" class="person-matches"></div>
+              <div class="two-col"><label>Date<input id="readyDate" type="date"></label><label>Time<input id="readyTime" type="time"></label></div>
+              <label>Incident Type<select id="readyIncidentType"><option value="">Select</option><option>Solicitud de información</option><option>Emergencia médica</option><option>Robo</option><option>Violencia</option><option>Accidente vial</option><option>Incendio</option></select></label>
+              <label>Priority</label>
+              <div class="priority-picker"><button data-priority="high" class="priority-dot high" title="Alta"></button><button data-priority="medium" class="priority-dot medium" title="Media"></button><button data-priority="low" class="priority-dot low selected" title="Baja"></button></div>
+              <label>Department</label>
+              <div class="department-picker"><button class="selected" data-department="police">🚓</button><button data-department="medical">🚑</button><button data-department="fire">🚒</button></div>
+              <label>Description<textarea id="readyDescription"></textarea></label>
+            </div>
+            <div class="ready-tab" id="ready-notes"><textarea id="readyNotes" placeholder="Operational notes"></textarea></div>
+            <div class="ready-tab" id="ready-involved"><div class="empty-state">No involved people yet</div></div>
+          </section>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="view" id="view-map">
-      <div class="page-pad map-page">
-        <div class="page-heading">
-          <div><h1>Mapa operativo</h1><p>Incidentes y agentes georreferenciados.</p></div>
-          <div class="map-tools">
-            <label><input type="checkbox" id="showIncidents" checked> Incidentes</label>
-            <label><input type="checkbox" id="showUnits" checked> Unidades</label>
-          </div>
+      <section class="suite-screen" id="screen-dispatch-console">
+        <div class="dispatch-console-layout">
+          <section class="surface dispatch-list-panel">
+            <div class="surface-toolbar">
+              <div class="search-box">⌕ <input id="dispatchSearch" placeholder="FOLIO, PHONE OR NAME..."></div>
+              <button class="plain-icon">↻</button><button class="plain-icon">▽</button>
+            </div>
+            <div class="pill-tabs compact"><button class="active" data-dispatch-filter="all">Todos</button><button data-dispatch-filter="gathering">GATHERING</button><button data-dispatch-filter="dispatched">DISPATCHED</button><button data-dispatch-filter="closed">CLOSED</button></div>
+            <div id="dispatchIncidentList" class="dispatch-incident-list"></div>
+          </section>
+
+          <section class="surface dispatch-center-panel">
+            <div class="segmented slim"><button class="active" data-dispatch-center="map">Mapa</button><button data-dispatch-center="comms">Comms</button></div>
+            <div class="dispatch-center-page active" id="dispatch-center-map">
+              <div class="segmented full"><button class="active">Address</button><button>Registered POI</button></div>
+              <div class="address-search">⌕ <input id="dispatchAddressSearch" placeholder="Search address"></div>
+              <div id="dispatchMap" class="dispatch-map"></div>
+              <div class="system-location"><span>⌾ System call location</span><small id="dispatchCoords"></small></div>
+              <strong id="dispatchAddressLine">—</strong>
+              <div class="address-fields compact-fields">
+                <input id="dispatchStreet" class="span-2" placeholder="STREET">
+                <input id="dispatchNumber" placeholder="NUMBER"><input id="dispatchNeighborhood" placeholder="NEIGHBORHOOD">
+                <input id="dispatchCity" placeholder="CITY"><input id="dispatchState" placeholder="STATE">
+                <input id="dispatchPostal" placeholder="POSTAL CODE"><input id="dispatchCountry" placeholder="COUNTRY">
+                <input id="dispatchReference" class="span-2" placeholder="REFERENCE">
+              </div>
+              <div class="button-row"><button class="primary wide" id="updateDispatchAddress">Update address</button><button id="resetDispatchAddress">Reset</button></div>
+            </div>
+            <div class="dispatch-center-page" id="dispatch-center-comms">
+              <div class="comms-tabs"><button class="active">Incident report</button><button>Calls report</button></div>
+              <div class="pill-tabs centered"><button class="active">Transcription</button><button>Audio</button><button>911 Card</button><button>Files</button></div>
+              <div id="incidentReport" class="incident-report"></div>
+            </div>
+          </section>
+
+          <section class="surface incident-detail-panel">
+            <div class="incident-detail-header"><div><strong id="dispatchDetailCode">—</strong> <span id="dispatchPriorityBadge" class="mini-priority">Priority</span></div><div><button class="plain-icon" id="exportSelectedPdf">PDF</button><button class="plain-icon" id="exportSelectedXlsx">XLS</button></div></div>
+            <small id="dispatchOperationalStatus">DISPATCH ASSIGNED</small>
+            <div class="pill-tabs centered small"><button class="active">Details</button><button>Edit</button><button>Notes</button><button>Involved</button></div>
+            <div id="dispatchDetailBody" class="dispatch-detail-body"></div>
+            <div class="assign-unit-box">
+              <div class="assign-title"><strong>Assign unit</strong><button class="plain-icon">↻</button></div>
+              <div class="assign-row"><select id="assignUnitSelect"></select><button class="primary" id="assignUnitBtn">Dispatch</button></div>
+            </div>
+          </section>
+
+          <section class="surface missions-panel">
+            <div class="surface-heading"><strong>Missions</strong><button class="plain-icon">↻</button></div>
+            <div id="missionsList" class="missions-list"></div>
+          </section>
         </div>
-        <div id="fullMap" class="full-map"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="view" id="view-people">
-      <div class="page-pad">
-        <div class="page-heading"><div><h1>Búsqueda de personas</h1><p>Consulta por DNI o CPF con datos simulados.</p></div></div>
-        <div class="panel people-panel">
-          <div class="search-row">
-            <input id="personSearch" placeholder="Buscar por nombre, DNI o CPF: 1, 12, 123, Daniel...">
-            <button class="primary" id="searchPerson">Buscar</button>
-          </div>
-<button type="button" id="resetDemoData" class="secondary">Restablecer datos demo</button>
-<div class="person-search-examples"><span>Ejemplos rápidos:</span><button type="button" data-person-example="1">1</button><button type="button" data-person-example="12">12</button><button type="button" data-person-example="123">123</button><button type="button" data-person-example="12345678901">12345678901</button><button type="button" data-person-example="Daniel">Daniel</button><button type="button" data-person-example="María">María</button><button type="button" data-person-example="Carlos">Carlos</button><button type="button" data-person-example="López">López</button><button type="button" data-person-example="Fernanda">Fernanda</button><button type="button" data-person-example="Ramírez">Ramírez</button></div>
-          <div id="personResult" class="person-result empty">Ingrese un documento para realizar la consulta.</div>
+      <section class="suite-screen" id="screen-map">
+        <div class="map-screen-layout">
+          <section class="surface map-list-panel">
+            <div class="surface-toolbar">
+              <div class="search-box">⌕ <input id="mapIncidentSearch" placeholder="FOLIO, PHONE OR NAME..."></div>
+              <button class="plain-icon">↻</button><button class="plain-icon">▽</button>
+            </div>
+            <div class="pill-tabs compact"><button class="active">Todos</button><button>GATHERING</button><button>DISPATCHED</button><button>CLOSED</button></div>
+            <div id="mapIncidentList" class="dispatch-incident-list"></div>
+          </section>
+
+          <section class="surface full-map-panel">
+            <div id="fullMap" class="full-map"></div>
+            <div class="units-overlay">
+              <div class="overlay-title"><strong><span class="live-dot"></span> Units (<span id="overlayUnitCount">0</span>)</strong><button id="closeUnitsOverlay">×</button></div>
+              <label class="show-map-toggle">◉ Show on map</label>
+              <div class="overlay-search">⌕ <input id="unitOverlaySearch" placeholder="SEARCH POINT OF INTEREST..."></div>
+              <div id="overlayUnitList"></div>
+            </div>
+            <div class="map-layer-stack"><button>LAYERS</button><button>⚠<small>10</small></button><button>◯<small>314</small></button><button>✦<small>104</small></button><button>▣<small>3</small></button><button>▰<small>3</small></button></div>
+          </section>
+
+          <section class="surface map-detail-panel">
+            <div class="incident-detail-header"><div><strong id="mapDetailCode">—</strong> <span id="mapPriorityBadge" class="mini-priority">Priority</span></div></div>
+            <small id="mapOperationalStatus">DISPATCH ASSIGNED</small>
+            <div class="pill-tabs centered small"><button class="active">Details</button><button>Edit</button><button>Notes</button><button>Involved</button><button>Nearby agents</button></div>
+            <div id="mapDetailBody" class="dispatch-detail-body"></div>
+          </section>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
+  </div>
 
-    <section class="view" id="view-reports">
-      <div class="page-pad">
-        <div class="page-heading"><div><h1>Reportes</h1><p>Descarga de incidentes finalizados o del historial completo.</p></div></div>
-        <div class="report-grid">
-          <div class="panel report-card">
-            <h2>Incidente seleccionado</h2>
-            <p>Genera un informe detallado con datos, unidades y cronología.</p>
-            <button class="primary" id="reportSelectedPdf">Descargar PDF</button>
-            <button id="reportSelectedXlsx">Descargar XLSX</button>
-          </div>
-          <div class="panel report-card">
-            <h2>Historial completo</h2>
-            <p>Exporta todos los incidentes registrados en el sistema.</p>
-            <button class="primary" id="reportAllPdf">Descargar PDF</button>
-            <button id="reportAllXlsx">Descargar XLSX</button>
-          </div>
-        </div>
-        <div class="panel compliance">
-          <h2>Cobertura funcional de la demostración</h2>
-          <div id="coverageGrid"></div>
-        </div>
-      </div>
-    </section>
-  </main>
-</div>
+  <aside id="utilityDrawer" class="utility-drawer" aria-hidden="true">
+    <div class="utility-header"><strong id="utilityTitle">Utilities</strong><button id="closeUtilities">×</button></div>
+    <div class="utility-nav"><button class="active" data-utility="dashboard">Dashboard</button><button data-utility="people">Personas</button><button data-utility="reports">Reportes</button></div>
+    <div class="utility-page active" id="utility-dashboard"><div id="utilityKpis" class="utility-kpis"></div><div id="utilityTables"></div></div>
+    <div class="utility-page" id="utility-people"><div class="drawer-search"><input id="utilityPersonSearch" placeholder="Nombre, DNI o CPF"><button id="utilityPersonBtn">Buscar</button></div><div id="utilityPersonResults"></div></div>
+    <div class="utility-page" id="utility-reports"><button class="primary wide" id="downloadAllPdf">Download PDF</button><button class="wide" id="downloadAllXlsx">Download XLSX</button></div>
+  </aside>
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+  <div id="toast" class="toast"></div>
 
-<dialog id="incidentDialog">
-  <form id="incidentForm">
-    <header><div><h2>Crear ocurrencia</h2><p>Registro manual de un nuevo incidente.</p></div><button type="button" id="closeDialog">×</button></header>
-    <div class="form-grid">
-      <label>Solicitante<input name="caller" required></label>
-      <label>DNI / CPF<input name="document" required></label>
-      <label>Tipo<input name="type" required placeholder="Ej. Accidente vial"></label>
-      <label>Prioridad<select name="priority"><option value="high">Alta</option><option value="medium">Media</option><option value="low">Baja</option></select></label>
-      <label class="wide">Dirección<input name="address" id="addressInput" required placeholder="Escriba dirección o punto de interés"></label>
-      <label class="wide">Descripción<textarea name="description" required></textarea></label>
-      <label>Latitud<input name="lat" id="latInput" type="number" step="any" required></label>
-      <label>Longitud<input name="lng" id="lngInput" type="number" step="any" required></label>
-    </div>
-    <div class="dialog-actions">
-      <button type="button" id="geocodeAddress">Geolocalizar dirección</button>
-      <span></span>
-      <button type="button" id="cancelDialog">Cancelar</button>
-      <button class="primary" type="submit">Crear incidente</button>
-    </div>
-  </form>
-</dialog>
-
-
-<dialog id="statusDialog">
-  <form id="statusForm">
-    <header><div><h2>Estado del incidente</h2><p>Actualiza el flujo operativo.</p></div><button type="button" id="closeStatusDialog">×</button></header>
-    <div class="form-grid">
-      <label class="wide">Estado
-        <select id="incidentStatusSelect">
-          <option value="received">Recibido</option>
-          <option value="validated">Validado</option>
-          <option value="dispatching">En despacho</option>
-          <option value="responding">En atención</option>
-          <option value="resolved">Resuelto</option>
-        </select>
-      </label>
-    </div>
-    <div class="dialog-actions"><span></span><span></span><button type="button" id="cancelStatusDialog">Cancelar</button><button class="primary" type="submit">Guardar</button></div>
-  </form>
-</dialog>
-
-<div id="toast" class="toast"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="./app-v19.js?v=19.0.0"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="./app-v20.js?v=20.0.0"></script>
 </body>
 </html>

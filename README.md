@@ -184,3 +184,8 @@ Tema claro completo inspirado en las pantallas Calltaker, Dispatch Console y Map
 - La pestaña activa y el menú lateral permanecen sincronizados.
 - La URL usa `#dispatch`, `#dashboard`, `#people` o `#map`.
 - El botón de pantalla completa es funcional.
+
+
+## Versión v19 — corrección de pantallas
+
+Se eliminó un bloque HTML duplicado que cerraba prematuramente el contenedor principal y provocaba pantallas en blanco. También se reforzó el tamaño del mapa y el redibujado de Leaflet al cambiar de pestaña.

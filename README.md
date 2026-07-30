@@ -167,3 +167,7 @@ La pantalla Dispatch fue rediseñada para aproximarse a la referencia proporcion
 ## Versión v16
 
 El logo vectorial fue sustituido por el logo exacto proporcionado en la captura del usuario. Se incluye como `n11-logo.png`.
+
+
+## Versión v17 — N11 Light Suite
+Tema claro completo inspirado en las pantallas Calltaker, Dispatch Console y Map proporcionadas. Se conservan todas las funciones existentes.

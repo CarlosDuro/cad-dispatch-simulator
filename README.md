@@ -22,3 +22,14 @@ Versión reconstruida para que cada pestaña superior muestre la pantalla corres
 - Mapas OpenStreetMap con Leaflet.
 
 Todos los datos son ficticios y se guardan en `localStorage`.
+
+
+## Versión v21 — ruta y despacho de la unidad más cercana
+
+- El sistema selecciona automáticamente la unidad disponible más cercana al incidente.
+- Al despacharla, solicita la ruta vial a OSRM y la dibuja sobre Dispatch Console y Map.
+- Si el servicio de rutas no está disponible, genera una ruta simulada de respaldo.
+- La línea azul representa el recorrido pendiente y la verde el trayecto completado.
+- La unidad avanza por la geometría de la ruta cada dos segundos.
+- Se muestran progreso, distancia restante y ETA en Missions, Dispatch y Map.
+- Al llegar, la unidad cambia automáticamente a `on_scene`.

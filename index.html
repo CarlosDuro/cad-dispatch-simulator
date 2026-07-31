@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="./styles-v20.css?v=20.0.0">
+  <link rel="stylesheet" href="./styles-v21.css?v=20.0.0">
 </head>
 <body>
   <div class="suite-shell">
@@ -141,6 +141,11 @@
               <div class="segmented full"><button class="active">Address</button><button>Registered POI</button></div>
               <div class="address-search">⌕ <input id="dispatchAddressSearch" placeholder="Search address"></div>
               <div id="dispatchMap" class="dispatch-map"></div>
+              <div class="route-legend" aria-label="Route status">
+                <span><i class="route-line remaining"></i> Ruta pendiente</span>
+                <span><i class="route-line completed"></i> Recorrido</span>
+              </div>
+              <div id="dispatchRouteSummary" class="route-summary">Asigne la unidad disponible más cercana para calcular la ruta.</div>
               <div class="system-location"><span>⌾ System call location</span><small id="dispatchCoords"></small></div>
               <strong id="dispatchAddressLine">—</strong>
               <div class="address-fields compact-fields">
@@ -166,7 +171,8 @@
             <div id="dispatchDetailBody" class="dispatch-detail-body"></div>
             <div class="assign-unit-box">
               <div class="assign-title"><strong>Assign unit</strong><button class="plain-icon">↻</button></div>
-              <div class="assign-row"><select id="assignUnitSelect"></select><button class="primary" id="assignUnitBtn">Dispatch</button></div>
+              <div id="nearestUnitStatus" class="nearest-unit-status">Calculando unidad más cercana…</div>
+              <div class="assign-row"><select id="assignUnitSelect" aria-label="Unidad más cercana"></select><button class="primary" id="assignUnitBtn">Dispatch nearest</button></div>
             </div>
           </section>
 
@@ -190,6 +196,10 @@
 
           <section class="surface full-map-panel">
             <div id="fullMap" class="full-map"></div>
+            <div class="route-legend map-route-legend" aria-label="Route status">
+              <span><i class="route-line remaining"></i> Ruta pendiente</span>
+              <span><i class="route-line completed"></i> Recorrido</span>
+            </div>
             <div class="units-overlay">
               <div class="overlay-title"><strong><span class="live-dot"></span> Units (<span id="overlayUnitCount">0</span>)</strong><button id="closeUnitsOverlay">×</button></div>
               <label class="show-map-toggle">◉ Show on map</label>
@@ -223,6 +233,6 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="./app-v20.js?v=20.0.0"></script>
+  <script src="./app-v21.js?v=20.0.0"></script>
 </body>
 </html>
